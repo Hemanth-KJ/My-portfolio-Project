@@ -1,0 +1,811 @@
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 100px 0 140px;
+  background: transparent;
+  color: #000;
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.about-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 45%,
+      transparent 82%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 45%,
+      transparent 82%
+    );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.about-header {
+  position: relative;
+  width: min(1400px, 92%);
+  margin: 0 auto 100px;
+
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #777;
+
+  z-index: 2;
+}
+
+.section-index {
+  white-space: nowrap;
+  color: #111;
+}
+
+.section-line {
+  width: 50px;
+  height: 1px;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.section-label {
+  white-space: nowrap;
+  color: #999;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.about-container {
+  position: relative;
+  width: min(1200px, 88%);
+  margin: 0 auto;
+  z-index: 2;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.about-eyebrow {
+  margin: 0 0 25px;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: #777;
+}
+
+.about-intro h1 {
+  margin: 0;
+
+  font-size: clamp(55px, 8vw, 120px);
+  line-height: 0.9;
+  letter-spacing: -0.07em;
+  font-weight: 800;
+
+  max-width: 1100px;
+}
+
+.about-intro h1 span {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #000;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.about-main {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 100px;
+
+  margin-top: 110px;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.about-profile {
+  position: relative;
+  width: 100%;
+}
+
+.profile-frame {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 0.82;
+
+  background: #f3f3f3;
+  border: 1px solid #dedede;
+
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.profile-frame::before {
+  content: "";
+
+  position: absolute;
+  inset: 10px;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+.profile-frame::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 30%;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0.28),
+      transparent
+    );
+
+  pointer-events: none;
+  z-index: 2;
+}
+
+.profile-frame img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    grayscale(100%)
+    contrast(1.04);
+
+  transition:
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.6s ease;
+}
+
+.profile-frame:hover img {
+  transform: scale(1.055);
+
+  filter:
+    grayscale(100%)
+    contrast(1.1);
+}
+
+
+/* =========================================================
+   CORNERS
+========================================================= */
+
+.profile-corner {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  z-index: 4;
+  pointer-events: none;
+}
+
+.top-left {
+  top: 15px;
+  left: 15px;
+
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.top-right {
+  top: 15px;
+  right: 15px;
+
+  border-top: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+.bottom-left {
+  bottom: 15px;
+  left: 15px;
+
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+}
+
+.bottom-right {
+  right: 15px;
+  bottom: 15px;
+
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+}
+
+
+/* =========================================================
+   PROFILE NUMBER
+========================================================= */
+
+.profile-number {
+  position: absolute;
+
+  top: 20px;
+  right: 22px;
+
+  z-index: 5;
+
+  padding: 7px 9px;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+
+
+/* =========================================================
+   PROFILE CAPTION
+========================================================= */
+
+.profile-caption {
+  margin: 12px 0 0;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #888;
+}
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+.copy-number {
+  display: block;
+
+  margin-bottom: 30px;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: #888;
+}
+
+.about-copy h2 {
+  margin: 0 0 30px;
+
+  font-size: clamp(30px, 4vw, 55px);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  font-weight: 800;
+}
+
+.about-copy p {
+  max-width: 540px;
+
+  margin: 0 0 20px;
+
+  font-size: 15px;
+  line-height: 1.8;
+  color: #555;
+}
+
+
+/* =========================================================
+   LINK
+========================================================= */
+
+.about-link {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 25px;
+
+  margin-top: 20px;
+  padding-bottom: 8px;
+
+  color: #000;
+  text-decoration: none;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  transition:
+    gap 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-link::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background: #000;
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-link:hover {
+  gap: 34px;
+}
+
+.about-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.about-link span {
+  font-size: 17px;
+  line-height: 1;
+
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   PHILOSOPHY
+========================================================= */
+
+.about-philosophy {
+  display: grid;
+
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 100px;
+
+  margin-top: 180px;
+  padding-top: 50px;
+
+  border-top: 1px solid #dedede;
+}
+
+.philosophy-title span,
+.stack-heading span {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: #888;
+}
+
+.philosophy-title h2,
+.stack-heading h2 {
+  margin: 18px 0 0;
+
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.philosophy-content > p {
+  max-width: 600px;
+
+  margin: 0 0 55px;
+
+  font-size: 20px;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: #222;
+}
+
+
+/* =========================================================
+   PHILOSOPHY ITEMS
+========================================================= */
+
+.philosophy-items {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  border-top: 1px solid #ddd;
+}
+
+.philosophy-items > div {
+  min-height: 170px;
+
+  padding: 25px 20px 25px 10px;
+
+  border-right: 1px solid #ddd;
+
+  transition:
+    background 0.35s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.philosophy-items > div:not(:first-child) {
+  padding-left: 20px;
+}
+
+.philosophy-items > div:last-child {
+  border-right: 0;
+}
+
+.philosophy-items > div:hover {
+  background: rgba(0, 0, 0, 0.025);
+  transform: translateY(-3px);
+}
+
+.philosophy-items span {
+  display: block;
+
+  margin-bottom: 25px;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  color: #888;
+}
+
+.philosophy-items strong {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.philosophy-items p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.6;
+  color: #777;
+}
+
+
+/* =========================================================
+   STACK
+========================================================= */
+
+.about-stack {
+  display: grid;
+
+  grid-template-columns: 0.7fr 1.3fr;
+  gap: 100px;
+
+  margin-top: 150px;
+  padding-top: 50px;
+
+  border-top: 1px solid #dedede;
+}
+
+.stack-list {
+  display: flex;
+
+  flex-wrap: wrap;
+  align-content: flex-start;
+
+  gap: 8px;
+}
+
+.stack-list span {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 40px;
+
+  padding: 11px 17px;
+
+  border: 1px solid #d8d8d8;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #333;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stack-list span:hover {
+  background: #000;
+  color: #fff;
+  border-color: #000;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.about-reveal {
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .about-main {
+    gap: 65px;
+  }
+
+  .about-philosophy,
+  .about-stack {
+    gap: 60px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .about-section {
+    padding-top: 80px;
+  }
+
+  .about-main {
+    grid-template-columns: 1fr;
+    gap: 65px;
+  }
+
+  .about-profile {
+    width: min(100%, 520px);
+    margin: 0 auto;
+  }
+
+  .about-copy {
+    max-width: 700px;
+  }
+
+  .about-philosophy,
+  .about-stack {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .philosophy-title h2,
+  .stack-heading h2 {
+    font-size: 34px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .about-section {
+    padding: 70px 0 100px;
+  }
+
+  .about-header {
+    width: 90%;
+    margin-bottom: 70px;
+    gap: 14px;
+  }
+
+  .about-container {
+    width: 90%;
+  }
+
+  .section-line {
+    width: 35px;
+  }
+
+  .about-eyebrow {
+    margin-bottom: 20px;
+    font-size: 8px;
+    line-height: 1.7;
+  }
+
+  .about-intro h1 {
+    font-size: 16vw;
+    line-height: 0.9;
+  }
+
+  .about-intro h1 span {
+    -webkit-text-stroke: 1px #000;
+  }
+
+  .about-main {
+    margin-top: 70px;
+    gap: 55px;
+  }
+
+  .profile-frame {
+    aspect-ratio: 0.82;
+  }
+
+  .about-copy h2 {
+    font-size: 34px;
+    line-height: 1.02;
+  }
+
+  .about-copy p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .about-philosophy,
+  .about-stack {
+    margin-top: 100px;
+  }
+
+  .philosophy-content > p {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .philosophy-items {
+    grid-template-columns: 1fr;
+  }
+
+  .philosophy-items > div,
+  .philosophy-items > div:not(:first-child) {
+    min-height: auto;
+
+    padding: 22px 10px;
+     
+    border-right: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .philosophy-items > div:last-child {
+    border-bottom: 0;
+  }
+
+  .philosophy-items span {
+    margin-bottom: 18px;
+  }
+
+  .stack-list {
+    gap: 7px;
+  }
+
+  .stack-list span {
+    padding: 10px 13px;
+    font-size: 8px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .about-intro h1 {
+    font-size: 15vw;
+  }
+
+  .about-copy h2 {
+    font-size: 30px;
+  }
+
+  .philosophy-title h2,
+  .stack-heading h2 {
+    font-size: 30px;
+  }
+
+  .profile-corner {
+    width: 15px;
+    height: 15px;
+  }
+
+  .profile-number {
+    top: 17px;
+    right: 18px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-reveal,
+  .profile-frame img,
+  .philosophy-items > div,
+  .stack-list span,
+  .about-link,
+  .about-link span {
+    transition: none !important;
+  }
+
+  .about-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}

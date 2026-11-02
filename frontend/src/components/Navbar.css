@@ -1,0 +1,1034 @@
+/* =========================================================
+   PREMIUM EDITORIAL NAVBAR
+========================================================= */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 82px;
+
+  z-index: 1000;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.97),
+      rgba(255, 255, 255, 0.88)
+    );
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.075);
+
+  backdrop-filter: blur(24px) saturate(120%);
+  -webkit-backdrop-filter: blur(24px) saturate(120%);
+
+  transition:
+    background 0.6s ease,
+    box-shadow 0.6s ease,
+    border-color 0.6s ease;
+}
+
+
+/* =========================================================
+   NAVBAR BOTTOM LIGHT
+========================================================= */
+
+.navbar::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -1px;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 5%,
+      rgba(0, 0, 0, 0.14) 50%,
+      transparent 95%
+    );
+
+  opacity: 0.5;
+
+  pointer-events: none;
+}
+
+
+/* Open menu navbar style */
+
+.navbar.is-open {
+  background: rgba(255, 255, 255, 0.99);
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.035);
+}
+
+
+/* =========================================================
+   NAVBAR INNER
+========================================================= */
+
+.navbar-inner {
+  position: relative;
+
+  width: min(1400px, 92%);
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: 1fr auto 1fr;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.navbar-logo {
+  position: relative;
+
+  justify-self: start;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 13px;
+
+  color: #050505;
+
+  text-decoration: none;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   LOGO BOX
+========================================================= */
+
+.logo-box {
+  position: relative;
+
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #050505;
+
+  color: #fff;
+
+  font-size: 17px;
+
+  font-weight: 900;
+
+  letter-spacing: -0.1em;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.6s cubic-bezier(.16, 1, .3, 1),
+    border-radius 0.6s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Logo shine */
+
+.logo-box::before {
+  content: "";
+
+  position: absolute;
+
+  top: -100%;
+  left: -70%;
+
+  width: 40%;
+  height: 300%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  transform: rotate(25deg);
+
+  transition:
+    left 0.7s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Logo hover shine */
+
+.navbar-logo:hover .logo-box::before {
+  left: 135%;
+}
+
+
+/* Logo hover transformation */
+
+.navbar-logo:hover .logo-box {
+  transform: rotate(-5deg) scale(1.04);
+
+  border-radius: 11px;
+}
+
+
+/* =========================================================
+   LOGO TEXT
+========================================================= */
+
+.logo-text {
+  position: relative;
+
+  font-size: 15px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.105em;
+
+  white-space: nowrap;
+
+  transition:
+    letter-spacing 0.5s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Logo text hover */
+
+.navbar-logo:hover .logo-text {
+  letter-spacing: 0.145em;
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
+
+.navbar-links {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 38px;
+}
+
+
+/* =========================================================
+   DESKTOP NAV LINK
+========================================================= */
+
+.nav-link {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  color: #777;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.095em;
+
+  transition:
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Nav link hover */
+
+.nav-link:hover {
+  color: #000;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ACTIVE DOT
+========================================================= */
+
+.nav-link::before {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 17px;
+
+  width: 4px;
+  height: 4px;
+
+  background: #000;
+
+  border-radius: 50%;
+
+  transform:
+    translateX(-50%)
+    scale(0);
+
+  transition:
+    transform 0.45s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Show dot on hover and active link */
+
+.nav-link:hover::before,
+.nav-link.active::before {
+  transform:
+    translateX(-50%)
+    scale(1);
+}
+
+
+/* Active nav link */
+
+.nav-link.active {
+  color: #050505;
+}
+
+
+/* =========================================================
+   NAV LINK UNDERLINE
+========================================================= */
+
+.nav-link span {
+  position: relative;
+
+  display: inline-block;
+}
+
+
+/* Underline animation */
+
+.nav-link span::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 100%;
+  height: 1px;
+
+  background: #000;
+
+  transform: scaleX(0);
+
+  transform-origin: right;
+
+  transition:
+    transform 0.45s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Show underline on hover */
+
+.nav-link:hover span::after {
+  transform: scaleX(1);
+
+  transform-origin: left;
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.menu-button {
+  display: none;
+
+  position: relative;
+
+  justify-self: end;
+
+  width: 94px;
+  height: 42px;
+
+  padding: 0 12px;
+
+  border: 1px solid rgba(0, 0, 0, 0.13);
+
+  background: rgba(255, 255, 255, 0.5);
+
+  cursor: pointer;
+
+  align-items: center;
+  justify-content: space-between;
+
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s ease;
+}
+
+
+/* Menu button hover */
+
+.menu-button:hover {
+  border-color: #000;
+
+  background: #fff;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MENU LABEL
+========================================================= */
+
+.menu-label {
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+
+  color: #111;
+}
+
+
+/* =========================================================
+   MENU ICON
+========================================================= */
+
+.menu-icon {
+  position: relative;
+
+  width: 21px;
+  height: 13px;
+}
+
+
+/* Menu icon lines */
+
+.menu-icon i {
+  position: absolute;
+
+  left: 0;
+
+  width: 21px;
+  height: 1px;
+
+  background: #000;
+
+  transition:
+    top 0.45s cubic-bezier(.16, 1, .3, 1),
+    transform 0.45s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* First line */
+
+.menu-icon i:first-child {
+  top: 3px;
+}
+
+
+/* Second line */
+
+.menu-icon i:last-child {
+  top: 10px;
+}
+
+
+/* Open menu: first line */
+
+.menu-button.open .menu-icon i:first-child {
+  top: 6px;
+
+  transform: rotate(45deg);
+}
+
+
+/* Open menu: second line */
+
+.menu-button.open .menu-icon i:last-child {
+  top: 6px;
+
+  transform: rotate(-45deg);
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+.mobile-menu {
+  position: fixed;
+
+  top: 82px;
+  left: 0;
+
+  width: 100%;
+  height: calc(100vh - 82px);
+
+  background: #fff;
+
+  visibility: hidden;
+
+  clip-path: inset(0 0 100% 0);
+
+  transition:
+    clip-path 0.8s cubic-bezier(.76, 0, .24, 1),
+    visibility 0s linear 0.8s;
+}
+
+
+/* Open mobile menu */
+
+.navbar.is-open .mobile-menu {
+  visibility: visible;
+
+  clip-path: inset(0 0 0 0);
+
+  transition:
+    clip-path 0.8s cubic-bezier(.76, 0, .24, 1),
+    visibility 0s;
+}
+
+
+/* =========================================================
+   MOBILE MENU CONTENT
+========================================================= */
+
+.mobile-menu-content {
+  position: relative;
+
+  width: min(1400px, 92%);
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   MOBILE HEADER
+========================================================= */
+
+.mobile-menu-header {
+  height: 72px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+.mobile-navigation {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+
+/* =========================================================
+   MOBILE NAV LINK
+========================================================= */
+
+.mobile-nav-link {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    50px
+    minmax(0, 1fr)
+    45px;
+
+  align-items: center;
+
+  min-height: 78px;
+
+  padding: 0;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  color: #050505;
+
+  text-decoration: none;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transform: translateY(40px);
+
+  transition:
+    opacity 0.6s ease var(--delay),
+    transform 0.75s cubic-bezier(.16, 1, .3, 1) var(--delay);
+}
+
+
+/* Mobile links animation when menu opens */
+
+.navbar.is-open .mobile-nav-link {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   MOBILE INDEX
+========================================================= */
+
+.mobile-index {
+  position: relative;
+
+  z-index: 2;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+
+  color: #aaa;
+
+  transition:
+    color 0.35s ease;
+}
+
+
+/* =========================================================
+   MOBILE NAME
+========================================================= */
+
+.mobile-name {
+  position: relative;
+
+  z-index: 2;
+
+  min-width: 0;
+
+  font-size: clamp(38px, 7vw, 70px);
+
+  line-height: 0.95;
+
+  font-weight: 800;
+
+  letter-spacing: -0.07em;
+
+  white-space: nowrap;
+
+  transition:
+    transform 0.55s cubic-bezier(.16, 1, .3, 1),
+    letter-spacing 0.55s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Mobile name hover */
+
+.mobile-nav-link:hover .mobile-name {
+  transform: translateX(14px);
+
+  letter-spacing: -0.055em;
+}
+
+
+/* =========================================================
+   PREMIUM LINE
+========================================================= */
+
+.mobile-line {
+  position: absolute;
+
+  right: 58px;
+
+  top: 50%;
+
+  width: 72px;
+
+  height: 1px;
+
+  background: #dedede;
+
+  transform:
+    translateY(-50%)
+    scaleX(0.65);
+
+  transform-origin: right;
+
+  pointer-events: none;
+
+  transition:
+    transform 0.55s cubic-bezier(.16, 1, .3, 1),
+    background 0.35s ease;
+}
+
+
+/* Premium line hover */
+
+.mobile-nav-link:hover .mobile-line {
+  background: #000;
+
+  transform:
+    translateY(-50%)
+    scaleX(1);
+}
+
+
+/* =========================================================
+   MOBILE ARROW
+========================================================= */
+
+.mobile-arrow {
+  position: relative;
+
+  z-index: 5;
+
+  justify-self: end;
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 19px;
+
+  line-height: 1;
+
+  opacity: 0;
+
+  transform:
+    translate(-8px, 8px);
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.45s cubic-bezier(.16, 1, .3, 1);
+}
+
+
+/* Arrow hover */
+
+.mobile-nav-link:hover .mobile-arrow {
+  opacity: 1;
+
+  transform:
+    translate(0, 0);
+}
+
+
+/* =========================================================
+   MOBILE ACTIVE
+========================================================= */
+
+.mobile-nav-link.active .mobile-name {
+  text-decoration: underline;
+
+  text-decoration-thickness: 1px;
+
+  text-underline-offset: 10px;
+}
+
+
+/* =========================================================
+   MOBILE FOOTER
+========================================================= */
+
+.mobile-menu-footer {
+  flex-shrink: 0;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-end;
+
+  padding: 26px 0;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+
+  line-height: 1.9;
+
+  letter-spacing: 0.11em;
+
+  color: #999;
+}
+
+
+/* Footer text columns */
+
+.mobile-menu-footer div {
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+  .navbar-inner {
+    width: 94%;
+  }
+
+  .navbar-links {
+    gap: 28px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+  .navbar-links {
+    gap: 22px;
+  }
+
+  .logo-text {
+    font-size: 13px;
+  }
+
+  .logo-box {
+    width: 38px;
+    height: 38px;
+  }
+
+  .nav-link {
+    font-size: 9px;
+
+    letter-spacing: 0.07em;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+  .navbar {
+    height: 70px;
+  }
+
+  .navbar-inner {
+    width: 90%;
+
+    display: flex;
+
+    justify-content: space-between;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .menu-button {
+    display: flex;
+  }
+
+  .mobile-menu {
+    top: 70px;
+
+    height: calc(100vh - 70px);
+  }
+
+  .mobile-menu-content {
+    width: 90%;
+  }
+
+  .mobile-nav-link {
+    grid-template-columns:
+      35px
+      minmax(0, 1fr)
+      40px;
+
+    min-height: 70px;
+  }
+
+  .mobile-line {
+    right: 50px;
+
+    width: 58px;
+  }
+
+  .mobile-arrow {
+    width: 32px;
+    height: 32px;
+
+    font-size: 17px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+  .navbar-inner {
+    width: 90%;
+  }
+
+  .logo-box {
+    width: 37px;
+    height: 37px;
+
+    font-size: 10px;
+  }
+
+  .logo-text {
+    font-size: 12px;
+
+    letter-spacing: 0.09em;
+  }
+
+  .navbar-logo {
+    gap: 10px;
+  }
+
+  .menu-button {
+    width: 88px;
+
+    height: 40px;
+  }
+
+  .mobile-menu-content {
+    width: 90%;
+  }
+
+  .mobile-menu-header {
+    height: 60px;
+
+    font-size: 7px;
+  }
+
+  .mobile-nav-link {
+    grid-template-columns:
+      30px
+      minmax(0, 1fr)
+      36px;
+
+    min-height: 68px;
+  }
+
+  .mobile-name {
+    font-size: 36px;
+  }
+
+  .mobile-line {
+    right: 44px;
+
+    width: 38px;
+  }
+
+  .mobile-arrow {
+    width: 30px;
+    height: 30px;
+
+    font-size: 16px;
+  }
+
+  .mobile-menu-footer {
+    padding: 18px 0;
+
+    font-size: 6px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 380px) {
+  .logo-text {
+    display: none;
+  }
+
+  .mobile-name {
+    font-size: 32px;
+  }
+
+  .mobile-nav-link {
+    min-height: 62px;
+  }
+
+  .mobile-line {
+    right: 40px;
+
+    width: 30px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar *,
+  .mobile-menu,
+  .mobile-nav-link,
+  .logo-box {
+    animation: none !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

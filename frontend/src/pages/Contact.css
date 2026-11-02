@@ -1,0 +1,1312 @@
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+.contact-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 100px 0 0;
+
+  background: transparent;
+  color: #050505;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.contact-container {
+  position: relative;
+
+  width: min(1200px, 88%);
+
+  margin: 0 auto;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   EDITORIAL GRID
+========================================================= */
+
+.contact-grid-background {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent 92%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    black 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    transparent 92%
+  );
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.contact-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #d8d8d8;
+}
+
+
+/* =========================================================
+   CONTACT LABEL
+========================================================= */
+
+.contact-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.contact-label span:first-child {
+  color: #111;
+}
+
+.contact-label span:last-child {
+  color: #999;
+}
+
+
+/* =========================================================
+   AVAILABILITY STATUS
+========================================================= */
+
+.contact-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  color: #555;
+}
+
+
+/* =========================================================
+   STATUS DOT
+========================================================= */
+
+.contact-status-dot {
+  position: relative;
+
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #050505;
+}
+
+.contact-status-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border: 1px solid #999;
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  animation: contactPulse 2s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.contact-hero {
+  position: relative;
+
+  padding: 105px 0 90px;
+
+  border-bottom: 1px solid #111;
+}
+
+
+/* =========================================================
+   HERO KICKER
+========================================================= */
+
+.contact-kicker {
+  margin: 0 0 28px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.contact-hero h1 {
+  margin: 0;
+
+  font-size:
+    clamp(80px, 11vw, 165px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   OUTLINE TEXT
+========================================================= */
+
+.contact-hero h1 span {
+  color: transparent;
+
+  -webkit-text-stroke: 1.5px #050505;
+}
+
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
+.contact-hero-bottom {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 60px;
+
+  margin-top: 75px;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.contact-hero-bottom p {
+  max-width: 450px;
+
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.85;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   PRIMARY EMAIL
+========================================================= */
+
+.contact-email {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 40px;
+
+  padding: 0 0 10px;
+
+  border-bottom: 1px solid #111;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.05em;
+
+  transition:
+    gap 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-email span {
+  font-size: 16px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.35s ease;
+}
+
+.contact-email:hover {
+  gap: 26px;
+
+  padding-left: 8px;
+}
+
+.contact-email:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   CONTACT BODY
+========================================================= */
+
+.contact-body {
+  display: grid;
+
+  grid-template-columns: 0.8fr 1.2fr;
+
+  gap: 100px;
+
+  padding: 75px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+
+/* =========================================================
+   SECTION TITLES
+========================================================= */
+
+.contact-info-title,
+.contact-form-title {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #111;
+}
+
+
+/* =========================================================
+   SECTION NUMBER
+========================================================= */
+
+.contact-info-title span,
+.contact-form-title span {
+  padding-top: 1px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.contact-info-title h2,
+.contact-form-title h2 {
+  margin: 0;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+
+/* =========================================================
+   CONTACT INFORMATION
+========================================================= */
+
+.contact-info-description {
+  max-width: 390px;
+
+  margin: 30px 0;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   CONTACT LINKS
+========================================================= */
+
+.contact-links {
+  border-top: 1px solid #ddd;
+}
+
+
+/* =========================================================
+   CONTACT LINK
+========================================================= */
+
+.contact-link {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 18px 0;
+
+  border-bottom: 1px solid #ddd;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  transition:
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+}
+
+
+/* =========================================================
+   CONTACT LINK ARROW
+========================================================= */
+
+.contact-link strong {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 26px;
+  height: 26px;
+
+  border: 1px solid #ddd;
+
+  font-size: 14px;
+
+  font-weight: 400;
+
+  color: #777;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+/* =========================================================
+   CONTACT LINK HOVER
+========================================================= */
+
+.contact-link:hover {
+  padding-left: 14px;
+}
+
+.contact-link:hover strong {
+  background: #050505;
+
+  border-color: #050505;
+
+  color: #fff;
+
+  transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.contact-form-wrapper {
+  min-width: 0;
+}
+
+.contact-form-title {
+  margin-bottom: 35px;
+}
+
+
+/* =========================================================
+   FORM FIELD
+========================================================= */
+
+.contact-field {
+  position: relative;
+
+  margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   FORM LABEL
+========================================================= */
+
+.contact-field label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   INPUT / TEXTAREA
+========================================================= */
+
+.contact-field input,
+.contact-field textarea {
+  width: 100%;
+
+  padding: 14px 0;
+
+  border: none;
+
+  border-bottom: 1px solid #bbb;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #050505;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+  resize: vertical;
+
+  transition:
+    border-color 0.3s ease,
+    padding 0.3s ease;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+.contact-field textarea {
+  min-height: 120px;
+}
+
+
+/* =========================================================
+   INPUT FOCUS
+========================================================= */
+
+.contact-field input:focus,
+.contact-field textarea:focus {
+  border-color: #050505;
+
+  padding-left: 8px;
+}
+
+
+/* =========================================================
+   PLACEHOLDER
+========================================================= */
+
+.contact-field input::placeholder,
+.contact-field textarea::placeholder {
+  color: #aaa;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.contact-submit {
+  position: relative;
+
+  width: 100%;
+
+  min-height: 52px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 18px;
+
+  border: 1px solid #050505;
+
+  background: #050505;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+.contact-submit span:last-child {
+  font-size: 16px;
+
+  transition:
+    transform 0.35s ease;
+}
+
+.contact-submit:hover {
+  background: #fff;
+
+  color: #050505;
+
+  transform: translate(-4px, -4px);
+
+  box-shadow: 5px 5px 0 #050505;
+}
+
+.contact-submit:hover span:last-child {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.contact-success {
+  display: flex;
+
+  align-items: center;
+
+  min-height: 44px;
+
+  margin-bottom: 25px;
+
+  padding: 12px 15px;
+
+  border: 1px solid #111;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   FOOTER CTA
+========================================================= */
+
+.contact-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 25px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+
+/* =========================================================
+   FOOTER LEFT
+========================================================= */
+
+.contact-footer-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.footer-number {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   FOOTER LEFT CONTENT
+========================================================= */
+
+.contact-footer-left div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.contact-footer-left div span {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  color: #999;
+}
+
+.contact-footer-left strong {
+  font-size: 9px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   FOOTER RIGHT
+========================================================= */
+
+.contact-footer-right {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+.contact-footer-right > span {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   SCROLL TOP BUTTON
+========================================================= */
+
+.contact-footer-right button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid #111;
+
+  background: #fff;
+
+  color: #050505;
+
+  cursor: pointer;
+
+  font-size: 17px;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.contact-footer-right button:hover {
+  background: #050505;
+
+  color: #fff;
+
+  transform: translate(-3px, -3px);
+
+  box-shadow: 4px 4px 0 #050505;
+}
+
+
+/* =========================================================
+   BIG FOOTER
+========================================================= */
+
+.contact-big-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  min-height: 130px;
+}
+
+
+/* =========================================================
+   FOOTER LOGO
+========================================================= */
+
+.footer-logo {
+  font-size: 35px;
+
+  font-weight: 900;
+
+  line-height: 1;
+
+  letter-spacing: -0.08em;
+}
+
+.footer-logo span {
+  color: #999;
+}
+
+
+/* =========================================================
+   FOOTER META
+========================================================= */
+
+.footer-copy,
+.footer-tech {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.13em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.contact-reveal {
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.contact-visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   STATUS ANIMATION
+========================================================= */
+
+@keyframes contactPulse {
+  0%,
+  100% {
+    transform: scale(0.7);
+
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1);
+
+    opacity: 0.8;
+  }
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .contact-body {
+    gap: 70px;
+  }
+
+  .contact-hero h1 {
+    font-size: clamp(
+      75px,
+      12vw,
+      145px
+    );
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+  .contact-section {
+    padding-top: 80px;
+  }
+
+  .contact-body {
+    grid-template-columns: 1fr;
+
+    gap: 70px;
+
+    padding: 65px 0;
+  }
+
+  .contact-info-description {
+    max-width: 600px;
+  }
+
+  .contact-form-wrapper {
+    max-width: 700px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 70px 0 0;
+  }
+
+  .contact-container {
+    width: 90%;
+  }
+
+
+  /* =======================================================
+     MOBILE HEADER
+  ======================================================= */
+
+  .contact-header {
+    padding-bottom: 17px;
+  }
+
+  .contact-label {
+    gap: 12px;
+
+    font-size: 8px;
+  }
+
+  .contact-status {
+    display: none;
+  }
+
+
+  /* =======================================================
+     MOBILE HERO
+  ======================================================= */
+
+  .contact-hero {
+    padding: 70px 0 65px;
+  }
+
+  .contact-kicker {
+    margin-bottom: 22px;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+  }
+
+  .contact-hero h1 {
+    font-size: 18vw;
+
+    line-height: 0.84;
+  }
+
+  .contact-hero h1 span {
+    -webkit-text-stroke: 1px #050505;
+  }
+
+
+  /* =======================================================
+     MOBILE HERO BOTTOM
+  ======================================================= */
+
+  .contact-hero-bottom {
+    display: block;
+
+    margin-top: 50px;
+  }
+
+  .contact-hero-bottom p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+
+  /* =======================================================
+     MOBILE EMAIL
+  ======================================================= */
+
+  .contact-email {
+    width: fit-content;
+
+    margin-top: 35px;
+
+    font-size: 8px;
+  }
+
+
+  /* =======================================================
+     MOBILE BODY
+  ======================================================= */
+
+  .contact-body {
+    gap: 60px;
+
+    padding: 60px 0;
+  }
+
+
+  /* =======================================================
+     MOBILE SECTION TITLES
+  ======================================================= */
+
+  .contact-info-title,
+  .contact-form-title {
+    gap: 13px;
+
+    padding-bottom: 17px;
+  }
+
+  .contact-info-title h2,
+  .contact-form-title h2 {
+    font-size: 9px;
+  }
+
+
+  /* =======================================================
+     MOBILE DESCRIPTION
+  ======================================================= */
+
+  .contact-info-description {
+    margin: 25px 0;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+  }
+
+
+  /* =======================================================
+     MOBILE CONTACT LINKS
+  ======================================================= */
+
+  .contact-link {
+    padding: 17px 0;
+
+    font-size: 7px;
+  }
+
+  .contact-link:hover {
+    padding-left: 8px;
+  }
+
+
+  /* =======================================================
+     MOBILE FORM
+  ======================================================= */
+
+  .contact-field {
+    margin-bottom: 27px;
+  }
+
+  .contact-field label {
+    font-size: 6.5px;
+  }
+
+  .contact-field input,
+  .contact-field textarea {
+    padding: 13px 0;
+
+    font-size: 11px;
+  }
+
+  .contact-field input:focus,
+  .contact-field textarea:focus {
+    padding-left: 5px;
+  }
+
+  .contact-field textarea {
+    min-height: 110px;
+  }
+
+
+  /* =======================================================
+     MOBILE SUBMIT
+  ======================================================= */
+
+  .contact-submit {
+    min-height: 48px;
+
+    padding: 13px 15px;
+
+    font-size: 7px;
+  }
+
+  .contact-submit span:last-child {
+    font-size: 14px;
+  }
+
+
+  /* =======================================================
+     MOBILE SUCCESS MESSAGE
+  ======================================================= */
+
+  .contact-success {
+    min-height: 42px;
+
+    font-size: 6.5px;
+  }
+
+
+  /* =======================================================
+     MOBILE FOOTER
+  ======================================================= */
+
+  .contact-footer {
+    padding: 20px 0;
+  }
+
+  .contact-footer-left {
+    gap: 12px;
+  }
+
+  .footer-number {
+    font-size: 8px;
+  }
+
+  .contact-footer-left div span {
+    font-size: 6.5px;
+  }
+
+  .contact-footer-left strong {
+    font-size: 8px;
+  }
+
+  .contact-footer-right > span {
+    display: none;
+  }
+
+  .contact-footer-right button {
+    width: 36px;
+    height: 36px;
+
+    font-size: 15px;
+  }
+
+
+  /* =======================================================
+     MOBILE BIG FOOTER
+  ======================================================= */
+
+  .contact-big-footer {
+    min-height: 100px;
+  }
+
+  .footer-logo {
+    font-size: 28px;
+  }
+
+  .footer-copy {
+    display: none;
+  }
+
+  .footer-tech {
+    font-size: 6px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .contact-hero h1 {
+    font-size: 17.5vw;
+  }
+
+  .contact-hero-bottom p {
+    font-size: 12px;
+  }
+
+  .contact-info-description {
+    font-size: 11.5px;
+  }
+
+  .contact-footer-left strong {
+    font-size: 7px;
+  }
+
+  .footer-tech {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-reveal,
+  .contact-email,
+  .contact-link,
+  .contact-link strong,
+  .contact-submit,
+  .contact-submit span:last-child,
+  .contact-footer-right button {
+    transition: none !important;
+  }
+
+  .contact-status-dot::after {
+    animation: none;
+  }
+
+  .contact-reveal {
+    opacity: 1;
+
+    transform: none;
+  }
+}

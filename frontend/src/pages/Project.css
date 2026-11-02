@@ -1,0 +1,1465 @@
+/* =========================================================
+   PROJECTS SECTION
+   Main wrapper for the complete projects page
+========================================================= */
+
+.projects-section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 100px 0 140px;
+
+  background: transparent;
+
+  color: #050505;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+   Subtle editorial grid behind the projects content
+========================================================= */
+
+.projects-section::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  /* Fade the grid toward the bottom */
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 50%,
+      transparent 88%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 50%,
+      transparent 88%
+    );
+}
+
+
+/* =========================================================
+   PROJECTS CONTAINER
+   Controls width and horizontal alignment
+========================================================= */
+
+.projects-container {
+  position: relative;
+
+  width: min(1200px, 88%);
+
+  margin: 0 auto;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   TOP HEADER
+   Section label and project section index
+========================================================= */
+
+.projects-top {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #d8d8d8;
+}
+
+/* Projects section label */
+.projects-label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+}
+
+/* Main label text */
+.projects-label span:first-child {
+  color: #111;
+}
+
+/* Secondary label text */
+.projects-label span:last-child {
+  color: #999;
+}
+
+/* Section number */
+.projects-index {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  color: #888;
+
+  letter-spacing: 0.15em;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   Main projects heading and description
+========================================================= */
+
+.projects-intro {
+  position: relative;
+
+  max-width: 1050px;
+
+  padding: 100px 0 80px;
+}
+
+/* Small introduction label */
+.projects-kicker {
+  margin: 0 0 24px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  color: #777;
+}
+
+/* Main projects heading */
+.projects-intro h1 {
+  margin: 0;
+
+  font-size:
+    clamp(60px, 8.5vw, 125px);
+
+  line-height: 0.87;
+
+  letter-spacing: -0.07em;
+
+  font-weight: 800;
+}
+
+/* Outlined heading text */
+.projects-intro h1 span {
+  color: transparent;
+
+  -webkit-text-stroke: 1.5px #050505;
+}
+
+/* Introduction description */
+.projects-description {
+  max-width: 520px;
+
+  margin: 45px 0 0;
+
+  font-size: 15px;
+
+  line-height: 1.8;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   PROJECT SELECTOR
+   Navigation buttons for switching projects
+========================================================= */
+
+.project-selector {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  border-top: 1px solid #111;
+
+  border-bottom: 1px solid #111;
+}
+
+/* Individual project selector */
+.project-selector-item {
+  position: relative;
+
+  min-height: 70px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 0 22px;
+
+  border: none;
+
+  border-right: 1px solid #d5d5d5;
+
+  background: rgba(255, 255, 255, 0.75);
+
+  color: #777;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    padding 0.4s
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Remove divider from final selector */
+.project-selector-item:last-child {
+  border-right: none;
+}
+
+/* Project selector number */
+.project-selector-item span:first-child {
+  flex-shrink: 0;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 9px;
+
+  color: #999;
+}
+
+/* Project selector title */
+.project-selector-item span:last-child {
+  min-width: 0;
+
+  font-size: 10px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* Selector hover effect */
+.project-selector-item:hover {
+  padding-left: 30px;
+
+  background: rgba(0, 0, 0, 0.025);
+
+  color: #050505;
+}
+
+/* Active project selector */
+.project-selector-item.active {
+  background: #050505;
+
+  color: #fff;
+}
+
+/* Active selector number */
+.project-selector-item.active span:first-child {
+  color: #999;
+}
+
+
+/* =========================================================
+   FEATURED PROJECT
+   Main project layout containing visual + content
+========================================================= */
+
+.featured-project {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    0.95fr 1.05fr;
+
+  margin-top: 55px;
+
+  border: 1px solid #111;
+
+  background: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================================
+   PROJECT VISUAL
+   Dark visual panel for the selected project
+========================================================= */
+
+.project-visual {
+  position: relative;
+
+  min-height: 650px;
+
+  overflow: hidden;
+
+  background: #050505;
+
+  color: #fff;
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   VISUAL GRID
+   Grid overlay inside the dark project visual
+========================================================= */
+
+.visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.065) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.065) 1px,
+      transparent 1px
+    );
+
+  background-size: 55px 55px;
+
+  /* Fade the visual grid toward the bottom */
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.75) 60%,
+      transparent 100%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.75) 60%,
+      transparent 100%
+    );
+}
+
+
+/* =========================================================
+   VISUAL PROJECT NUMBER
+   Large outlined number inside visual panel
+========================================================= */
+
+.visual-number {
+  position: absolute;
+
+  top: 28px;
+
+  left: 32px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 92px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: transparent;
+
+  -webkit-text-stroke:
+    1px rgba(255, 255, 255, 0.25);
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   VISUAL CENTER
+   Centered circular project graphic
+========================================================= */
+
+.visual-center {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  z-index: 2;
+}
+
+/* Main rotating circle */
+.visual-circle {
+  position: relative;
+
+  width: 270px;
+
+  height: 270px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.48);
+
+  border-radius: 50%;
+
+  animation:
+    rotateProject 20s
+    linear infinite;
+}
+
+/* Outer and inner decorative rings */
+.visual-circle::before,
+.visual-circle::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 310px;
+  height: 310px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+/* Inner decorative ring */
+.visual-circle::after {
+  width: 200px;
+  height: 200px;
+}
+
+/* Center project identifier */
+.visual-circle-inner {
+  width: 110px;
+
+  height: 110px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 1px solid #fff;
+
+  border-radius: 50%;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  animation:
+    rotateProjectReverse 20s
+    linear infinite;
+}
+
+
+/* =========================================================
+   VISUAL LABELS
+   Small metadata labels around the visual
+========================================================= */
+
+.visual-label {
+  position: absolute;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+
+  color: #999;
+
+  z-index: 3;
+}
+
+/* Top-right visual label */
+.visual-label-top {
+  top: 32px;
+
+  right: 32px;
+}
+
+/* Bottom-left visual label */
+.visual-label-bottom {
+  bottom: 28px;
+
+  left: 32px;
+}
+
+
+/* =========================================================
+   VISUAL LINES
+   Technical crosshair lines for the visual panel
+========================================================= */
+
+.visual-line {
+  position: absolute;
+
+  background:
+    rgba(255, 255, 255, 0.2);
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* Vertical technical line */
+.line-one {
+  top: 0;
+
+  right: 25%;
+
+  width: 1px;
+
+  height: 100%;
+}
+
+/* Horizontal technical line */
+.line-two {
+  left: 0;
+
+  bottom: 25%;
+
+  width: 100%;
+
+  height: 1px;
+}
+
+
+/* =========================================================
+   PROJECT CONTENT
+   Right-side information panel
+========================================================= */
+
+.project-content {
+  min-width: 0;
+
+  padding: 45px;
+}
+
+
+/* =========================================================
+   CONTENT HEADER
+   Project category and metadata
+========================================================= */
+
+.project-content-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #ddd;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   PROJECT TITLE
+========================================================= */
+
+.project-content h2 {
+  margin: 45px 0 25px;
+
+  font-size:
+    clamp(40px, 5vw, 68px);
+
+  line-height: 0.9;
+
+  letter-spacing: -0.055em;
+
+  font-weight: 800;
+}
+
+/* Individual title line */
+.project-content h2 span {
+  display: inline;
+}
+
+
+/* =========================================================
+   PROJECT DESCRIPTION
+========================================================= */
+
+.project-description {
+  max-width: 480px;
+
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   TECHNOLOGIES
+   Technology badges used by the project
+========================================================= */
+
+.project-tech {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin-top: 30px;
+}
+
+/* Individual technology badge */
+.project-tech span {
+  display: inline-flex;
+
+  align-items: center;
+
+  min-height: 32px;
+
+  padding: 8px 11px;
+
+  border: 1px solid #d1d1d1;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  color: #444;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s
+      cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Technology badge hover */
+.project-tech span:hover {
+  background: #050505;
+
+  border-color: #050505;
+
+  color: #fff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   PROJECT HIGHLIGHTS
+========================================================= */
+
+.project-highlights {
+  margin-top: 40px;
+}
+
+/* Highlights section heading */
+.highlights-title {
+  padding-bottom: 12px;
+
+  border-bottom: 1px solid #111;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+}
+
+/* Individual highlight row */
+.highlight-item {
+  display: grid;
+
+  grid-template-columns: 35px minmax(0, 1fr);
+
+  gap: 10px;
+
+  padding: 13px 0;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Highlight number */
+.highlight-item span {
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  color: #888;
+}
+
+/* Highlight description */
+.highlight-item p {
+  margin: 0;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+
+  color: #333;
+}
+
+
+/* =========================================================
+   PROJECT ACTIONS
+   GitHub / Live Demo buttons
+========================================================= */
+
+.project-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 35px;
+}
+
+/* Base project button */
+.project-button {
+  min-width: 145px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #050505;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+
+  transition:
+    transform 0.35s
+      cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Button arrow/icon */
+.project-button span {
+  font-size: 15px;
+
+  line-height: 1;
+}
+
+/* Primary button */
+.project-button.primary {
+  background: #050505;
+
+  color: #fff;
+}
+
+/* Secondary button */
+.project-button.secondary {
+  background: #fff;
+
+  color: #050505;
+}
+
+/* Button hover animation */
+.project-button:hover {
+  transform:
+    translate(-4px, -4px);
+
+  box-shadow:
+    5px 5px 0 #050505;
+}
+
+/* Secondary button hover */
+.project-button.secondary:hover {
+  background: #050505;
+
+  color: #fff;
+}
+
+
+/* =========================================================
+   BOTTOM STATEMENT
+   Project statistics / summary information
+========================================================= */
+
+.projects-bottom {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  margin-top: 55px;
+
+  border-top: 1px solid #111;
+
+  border-bottom: 1px solid #111;
+}
+
+/* Individual bottom statistic */
+.projects-bottom > div {
+  min-height: 105px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 22px;
+
+  border-right: 1px solid #ddd;
+}
+
+/* Remove divider from final statistic */
+.projects-bottom > div:last-child {
+  border-right: none;
+}
+
+/* Statistic value */
+.projects-bottom span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+/* Statistic label */
+.projects-bottom p {
+  margin: 0;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  color: #777;
+
+  letter-spacing: 0.13em;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+   Initial hidden state for project animations
+========================================================= */
+
+.project-reveal {
+  opacity: 0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s
+      cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Visible state after intersection observer */
+.project-visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
+   ROTATION ANIMATIONS
+   Circular project visual animations
+========================================================= */
+
+/* Clockwise rotation */
+@keyframes rotateProject {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Counter-clockwise rotation */
+@keyframes rotateProjectReverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  /* Reduce intro width */
+  .projects-intro {
+    max-width: 850px;
+  }
+
+  /* Adjust featured project proportions */
+  .featured-project {
+    grid-template-columns:
+      0.9fr 1.1fr;
+  }
+
+  /* Reduce content spacing */
+  .project-content {
+    padding: 35px;
+  }
+
+  /* Reduce visual height */
+  .project-visual {
+    min-height: 600px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  /* Reduce section top spacing */
+  .projects-section {
+    padding-top: 80px;
+  }
+
+  /* Reduce intro spacing */
+  .projects-intro {
+    padding:
+      80px 0
+      65px;
+  }
+
+  /* Stack visual and content vertically */
+  .featured-project {
+    grid-template-columns: 1fr;
+  }
+
+  /* Reduce visual height */
+  .project-visual {
+    min-height: 480px;
+  }
+
+  /* Adjust content padding */
+  .project-content {
+    padding: 35px;
+  }
+
+  /* Adjust title size */
+  .project-content h2 {
+    font-size: 58px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  /* Mobile section spacing */
+  .projects-section {
+    padding: 70px 0 100px;
+  }
+
+  /* Mobile container width */
+  .projects-container {
+    width: 90%;
+  }
+
+
+  /* =======================================================
+     MOBILE HEADER
+  ======================================================= */
+
+  .projects-top {
+    padding-bottom: 17px;
+  }
+
+  .projects-label {
+    gap: 12px;
+
+    font-size: 8px;
+  }
+
+  .projects-index {
+    font-size: 7px;
+  }
+
+
+  /* =======================================================
+     MOBILE INTRO
+  ======================================================= */
+
+  .projects-intro {
+    padding:
+      70px 0
+      55px;
+  }
+
+  .projects-kicker {
+    margin-bottom: 20px;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+  }
+
+  .projects-intro h1 {
+    font-size: 15vw;
+
+    line-height: 0.9;
+  }
+
+  .projects-intro h1 span {
+    -webkit-text-stroke: 1px #050505;
+  }
+
+  .projects-description {
+    margin-top: 35px;
+
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+
+  /* =======================================================
+     MOBILE PROJECT SELECTOR
+  ======================================================= */
+
+  .project-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .project-selector-item {
+    min-height: 58px;
+
+    padding: 0 15px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #ddd;
+  }
+
+  .project-selector-item:last-child {
+    border-bottom: none;
+  }
+
+  .project-selector-item:hover {
+    padding-left: 21px;
+  }
+
+  .project-selector-item span:last-child {
+    font-size: 9px;
+  }
+
+
+  /* =======================================================
+     MOBILE PROJECT VISUAL
+  ======================================================= */
+
+  .featured-project {
+    margin-top: 40px;
+  }
+
+  .project-visual {
+    min-height: 400px;
+  }
+
+  .visual-number {
+    top: 23px;
+
+    left: 22px;
+
+    font-size: 70px;
+  }
+
+  .visual-label-top {
+    top: 25px;
+
+    right: 22px;
+  }
+
+  .visual-label-bottom {
+    bottom: 22px;
+
+    left: 22px;
+  }
+
+  .visual-circle {
+    width: 210px;
+
+    height: 210px;
+  }
+
+  .visual-circle::before {
+    width: 245px;
+
+    height: 245px;
+  }
+
+  .visual-circle::after {
+    width: 160px;
+
+    height: 160px;
+  }
+
+  .visual-circle-inner {
+    width: 90px;
+
+    height: 90px;
+
+    font-size: 17px;
+  }
+
+
+  /* =======================================================
+     MOBILE PROJECT CONTENT
+  ======================================================= */
+
+  .project-content {
+    padding: 25px 20px;
+  }
+
+  .project-content-header {
+    font-size: 7px;
+  }
+
+  .project-content h2 {
+    margin:
+      35px 0
+      22px;
+
+    font-size: 45px;
+
+    line-height: 0.91;
+  }
+
+  .project-description {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+
+  /* =======================================================
+     MOBILE TECHNOLOGIES
+  ======================================================= */
+
+  .project-tech {
+    gap: 6px;
+
+    margin-top: 25px;
+  }
+
+  .project-tech span {
+    min-height: 29px;
+
+    padding: 7px 9px;
+
+    font-size: 7px;
+  }
+
+
+  /* =======================================================
+     MOBILE HIGHLIGHTS
+  ======================================================= */
+
+  .project-highlights {
+    margin-top: 32px;
+  }
+
+  .highlight-item {
+    grid-template-columns:
+      28px minmax(0, 1fr);
+
+    gap: 8px;
+
+    padding: 12px 0;
+  }
+
+  .highlight-item p {
+    font-size: 11px;
+
+    line-height: 1.55;
+  }
+
+
+  /* =======================================================
+     MOBILE ACTIONS
+  ======================================================= */
+
+  .project-actions {
+    flex-direction: column;
+
+    margin-top: 30px;
+  }
+
+  .project-button {
+    width: 100%;
+
+    min-height: 48px;
+  }
+
+
+  /* =======================================================
+     MOBILE BOTTOM STATISTICS
+  ======================================================= */
+
+  .projects-bottom {
+    grid-template-columns: 1fr;
+
+    margin-top: 45px;
+  }
+
+  .projects-bottom > div {
+    min-height: 85px;
+
+    border-right: none;
+
+    border-bottom: 1px solid #ddd;
+  }
+
+  .projects-bottom > div:last-child {
+    border-bottom: none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  /* Smaller main heading */
+  .projects-intro h1 {
+    font-size: 14.5vw;
+  }
+
+  /* Smaller visual */
+  .project-visual {
+    min-height: 360px;
+  }
+
+  .visual-circle {
+    width: 185px;
+
+    height: 185px;
+  }
+
+  .visual-circle::before {
+    width: 215px;
+
+    height: 215px;
+  }
+
+  .visual-circle::after {
+    width: 140px;
+
+    height: 140px;
+  }
+
+  .visual-circle-inner {
+    width: 78px;
+
+    height: 78px;
+
+    font-size: 15px;
+  }
+
+  /* Smaller project title */
+  .project-content h2 {
+    font-size: 39px;
+  }
+
+  /* Smaller description */
+  .project-description {
+    font-size: 12px;
+  }
+
+  /* Smaller bottom statistic */
+  .projects-bottom span {
+    font-size: 16px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   Accessibility support for users who prefer less motion
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  /* Disable transitions */
+  .project-reveal,
+  .project-selector-item,
+  .technology-card,
+  .project-button,
+  .project-tech span {
+    transition: none !important;
+  }
+
+  /* Disable rotating animations */
+  .visual-circle,
+  .visual-circle-inner {
+    animation: none !important;
+  }
+
+  /* Show reveal content immediately */
+  .project-reveal {
+    opacity: 1;
+
+    transform: none;
+  }
+}

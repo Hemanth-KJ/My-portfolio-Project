@@ -1,0 +1,37 @@
+/* ================================
+   CUSTOM CURSOR
+================================ */
+
+.custom-cursor {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #000000;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+
+  transition:
+    width 0.25s ease,
+    height 0.25s ease,
+    background 0.25s ease;
+}
+
+/* Cursor hover state */
+.custom-cursor.cursor-hover {
+  width: 42px;
+  height: 42px;
+  background: #000000;
+  mix-blend-mode: difference;
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 800px) {
+  .custom-cursor {
+    display: none;
+  }
+}

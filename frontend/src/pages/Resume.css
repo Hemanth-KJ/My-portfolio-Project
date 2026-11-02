@@ -1,0 +1,1203 @@
+/* =========================================================
+   RESUME SECTION
+========================================================= */
+
+.resume-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+
+  padding: 100px 0 140px;
+
+  background: transparent;
+  color: #050505;
+
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   EDITORIAL GRID
+--------------------------------------------------------- */
+
+.resume-section::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.025) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 50%,
+      transparent 90%
+    );
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      rgba(0, 0, 0, 0.65) 50%,
+      transparent 90%
+    );
+}
+
+/* ---------------------------------------------------------
+   RESUME CONTAINER
+--------------------------------------------------------- */
+
+.resume-container {
+  position: relative;
+
+  width: min(1200px, 88%);
+
+  margin: 0 auto;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.resume-header {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 20px;
+
+  border-bottom: 1px solid #d8d8d8;
+}
+
+/* Header label */
+
+.resume-label {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.resume-label span:first-child {
+  color: #111;
+}
+
+.resume-label span:last-child {
+  color: #999;
+}
+
+
+/* =========================================================
+   TOP DOWNLOAD BUTTON
+========================================================= */
+
+.resume-download-top {
+  display: flex;
+  align-items: center;
+
+  gap: 16px;
+
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border: 1px solid #111;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+/* Download icon */
+
+.resume-download-top span {
+  font-size: 15px;
+
+  line-height: 1;
+}
+
+/* Download hover */
+
+.resume-download-top:hover {
+  background: #050505;
+
+  color: #fff;
+
+  transform: translate(-4px, -4px);
+
+  box-shadow: 5px 5px 0 #050505;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.resume-hero {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 1.2fr 0.8fr;
+
+  gap: 80px;
+
+  padding: 105px 0 90px;
+
+  border-bottom: 1px solid #111;
+}
+
+/* Hero left content */
+
+.resume-hero-left {
+  min-width: 0;
+}
+
+/* Hero kicker */
+
+.resume-kicker {
+  margin: 0 0 28px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: #777;
+}
+
+/* Hero name */
+
+.resume-hero h1 {
+  margin: 0;
+
+  font-size: clamp(80px, 11vw, 165px);
+
+  line-height: 0.8;
+
+  letter-spacing: -0.09em;
+
+  font-weight: 900;
+}
+
+/* Outlined name */
+
+.resume-hero h1 span {
+  color: transparent;
+
+  -webkit-text-stroke: 1.5px #050505;
+}
+
+/* Hero right content */
+
+.resume-hero-right {
+  align-self: end;
+
+  max-width: 390px;
+
+  padding-bottom: 4px;
+}
+
+/* Hero description */
+
+.resume-hero-right > p {
+  margin: 0;
+
+  font-size: 14px;
+
+  line-height: 1.85;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.resume-status {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 30px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid #ddd;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+
+  font-weight: 700;
+
+  line-height: 1.6;
+
+  letter-spacing: 0.12em;
+
+  color: #555;
+}
+
+/* Status indicator */
+
+.status-dot {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #050505;
+}
+
+/* Status pulse */
+
+.status-dot::after {
+  content: "";
+
+  position: absolute;
+
+  inset: -4px;
+
+  border: 1px solid #999;
+
+  border-radius: 50%;
+
+  opacity: 0;
+
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+/* Status pulse animation */
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    transform: scale(0.7);
+
+    opacity: 0;
+  }
+
+  50% {
+    transform: scale(1);
+
+    opacity: 0.8;
+  }
+}
+
+
+/* =========================================================
+   RESUME BLOCK
+========================================================= */
+
+.resume-block {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 250px minmax(0, 1fr);
+
+  padding: 75px 0;
+
+  border-bottom: 1px solid #111;
+}
+
+/* Block title */
+
+.resume-block-title {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 18px;
+}
+
+/* Block number */
+
+.resume-block-title > span {
+  padding-top: 2px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+/* Block heading */
+
+.resume-block-title h2 {
+  margin: 0;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.15em;
+}
+
+/* Block content */
+
+.resume-block-content {
+  min-width: 0;
+}
+
+
+/* =========================================================
+   EXPERIENCE
+========================================================= */
+
+.resume-experience {
+  display: grid;
+
+  grid-template-columns: 120px minmax(0, 1fr);
+
+  gap: 35px;
+
+  padding-bottom: 10px;
+}
+
+/* Experience year */
+
+.resume-year {
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.08em;
+
+  color: #777;
+}
+
+/* Experience / education / project titles */
+
+.resume-experience h3,
+.resume-education h3,
+.resume-project h3 {
+  margin: 0;
+
+  font-size: 27px;
+
+  line-height: 1;
+
+  letter-spacing: -0.045em;
+
+  font-weight: 800;
+}
+
+/* Experience type */
+
+.resume-type {
+  display: inline-block;
+
+  margin-top: 10px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+
+  color: #888;
+}
+
+/* Experience description */
+
+.resume-experience p {
+  max-width: 600px;
+
+  margin: 22px 0 0;
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   EDUCATION
+========================================================= */
+
+.resume-education {
+  display: grid;
+  padding-bottom: 10px;
+  grid-template-columns: 120px minmax(0, 1fr);
+
+  gap: 35px;
+}
+
+/* Education description */
+
+.resume-education p {
+  margin: 9px 0 0;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.resume-project {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 50px minmax(0, 1fr) 30px;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 22px 0;
+
+  border-bottom: 1px solid #ddd;
+
+  transition:
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.3s ease;
+}
+
+/* First project */
+
+.resume-project:first-child {
+  padding-top: 0;
+}
+
+/* Last project */
+
+.resume-project:last-child {
+  border-bottom: none;
+}
+
+/* Project hover */
+
+.resume-project:hover {
+  padding-left: 15px;
+}
+
+/* Project number */
+
+.resume-project-number {
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  color: #999;
+}
+
+/* Project title transition */
+
+.resume-project h3 {
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Project title hover */
+
+.resume-project:hover h3 {
+  transform: translateX(3px);
+}
+
+/* Project technology text */
+
+.resume-project p {
+  margin: 8px 0 0;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+
+  line-height: 1.6;
+
+  letter-spacing: 0.1em;
+
+  color: #888;
+}
+
+/* Project arrow */
+
+.resume-project-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border: 1px solid #ddd;
+
+  font-size: 16px;
+
+  color: #999;
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Project arrow hover */
+
+.resume-project:hover .resume-project-arrow {
+  background: #050505;
+
+  border-color: #050505;
+
+  color: #fff;
+
+  transform: translate(4px, -4px);
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.resume-skills {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  border-top: 1px solid #111;
+
+  border-left: 1px solid #111;
+}
+
+/* Individual skill */
+
+.resume-skill {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  min-height: 65px;
+
+  padding: 15px 17px;
+
+  border-right: 1px solid #111;
+
+  border-bottom: 1px solid #111;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Skill hover */
+
+.resume-skill:hover {
+  padding-left: 22px;
+
+  background: #050505;
+
+  color: #fff;
+}
+
+/* Skill number */
+
+.resume-skill span {
+  flex-shrink: 0;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+
+  color: #999;
+
+  transition: color 0.3s ease;
+}
+
+/* Skill number hover */
+
+.resume-skill:hover span {
+  color: #777;
+}
+
+/* Skill name */
+
+.resume-skill strong {
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.resume-cta {
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 50px;
+
+  padding: 105px 0 40px;
+}
+
+/* CTA small label */
+
+.resume-cta-small {
+  display: block;
+
+  margin-bottom: 22px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  color: #777;
+}
+
+/* CTA heading */
+
+.resume-cta h2 {
+  margin: 0;
+
+  font-size: clamp(58px, 8vw, 105px);
+
+  line-height: 0.82;
+
+  letter-spacing: -0.075em;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   LAST SECTION DOWNLOAD BUTTON
+========================================================= */
+
+.resume-download-button {
+  position: relative;
+
+  flex-shrink: 0;
+
+  width: 135px;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  padding: 13px 17px;
+
+  border: 1px solid #050505;
+
+  background: #050505;
+
+  color: #fff;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+
+  font-weight: 800;
+
+  line-height: 1.4;
+
+  letter-spacing: 0.11em;
+
+  text-align: center;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease,
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s ease;
+}
+
+/* Download icon */
+
+.resume-download-button span {
+  margin-top: 0;
+
+  font-size: 15px;
+
+  line-height: 1;
+}
+
+/* Download button hover */
+
+.resume-download-button:hover {
+  background: #fff;
+
+  color: #050505;
+
+  transform: translate(-4px, -4px);
+
+  box-shadow: 5px 5px 0 #050505;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.resume-reveal {
+  opacity: 0;
+
+  transform: translateY(35px);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.resume-visible {
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  /* Hero layout */
+
+  .resume-hero {
+    grid-template-columns: 1fr 0.75fr;
+
+    gap: 55px;
+  }
+
+  /* Resume block layout */
+
+  .resume-block {
+    grid-template-columns: 210px minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  /* Section spacing */
+
+  .resume-section {
+    padding-top: 80px;
+  }
+
+  /* Hero */
+
+  .resume-hero {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+
+    padding: 80px 0;
+  }
+
+  .resume-hero-right {
+    max-width: 600px;
+  }
+
+  /* Resume block */
+
+  .resume-block {
+    grid-template-columns: 170px minmax(0, 1fr);
+  }
+
+  /* Skills */
+
+  .resume-skills {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  /* Section */
+
+  .resume-section {
+    padding: 70px 0 100px;
+  }
+
+  .resume-container {
+    width: 90%;
+  }
+
+  /* Header */
+
+  .resume-header {
+    padding-bottom: 17px;
+  }
+
+  .resume-label {
+    gap: 12px;
+
+    font-size: 8px;
+  }
+
+  /* Top download */
+
+  .resume-download-top {
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    font-size: 7px;
+  }
+
+  .resume-download-top span {
+    display: none;
+  }
+
+  /* Hero */
+
+  .resume-hero {
+    padding: 70px 0 65px;
+
+    gap: 45px;
+  }
+
+  .resume-kicker {
+    margin-bottom: 22px;
+
+    font-size: 8px;
+
+    line-height: 1.7;
+  }
+
+  .resume-hero h1 {
+    font-size: 18vw;
+
+    line-height: 0.84;
+  }
+
+  .resume-hero h1 span {
+    -webkit-text-stroke: 1px #050505;
+  }
+
+  .resume-hero-right > p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
+  /* Status */
+
+  .resume-status {
+    margin-top: 25px;
+
+    font-size: 6.5px;
+  }
+
+  /* Resume blocks */
+
+  .resume-block {
+    display: block;
+
+    padding: 55px 0;
+  }
+
+  .resume-block-title {
+    margin-bottom: 35px;
+  }
+
+  .resume-block-title h2 {
+    font-size: 9px;
+  }
+
+  /* Experience / education */
+
+  .resume-experience,
+  .resume-education {
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+  }
+
+  .resume-year {
+    font-size: 8px;
+  }
+
+  .resume-experience h3,
+  .resume-education h3,
+  .resume-project h3 {
+    font-size: 21px;
+  }
+
+  .resume-type {
+    font-size: 6.5px;
+
+    line-height: 1.6;
+  }
+
+  .resume-experience p {
+    margin-top: 18px;
+
+    font-size: 12px;
+
+    line-height: 1.75;
+  }
+
+  .resume-education p {
+    font-size: 7px;
+  }
+
+  /* Projects */
+
+  .resume-project {
+    grid-template-columns: 35px minmax(0, 1fr) 28px;
+
+    gap: 12px;
+
+    padding: 19px 0;
+  }
+
+  .resume-project:hover {
+    padding-left: 8px;
+  }
+
+  .resume-project p {
+    font-size: 6.5px;
+
+    line-height: 1.6;
+  }
+
+  .resume-project-arrow {
+    width: 25px;
+    height: 25px;
+
+    font-size: 14px;
+  }
+
+  /* Skills */
+
+  .resume-skills {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .resume-skill {
+    min-height: 58px;
+
+    padding: 13px 12px;
+
+    gap: 10px;
+  }
+
+  .resume-skill:hover {
+    padding-left: 16px;
+  }
+
+  .resume-skill strong {
+    font-size: 8px;
+
+    line-height: 1.4;
+  }
+
+  /* CTA */
+
+  .resume-cta {
+    display: block;
+
+    padding-top: 75px;
+  }
+
+  .resume-cta-small {
+    margin-bottom: 18px;
+
+    font-size: 7px;
+  }
+
+  .resume-cta h2 {
+    font-size: 15vw;
+
+    line-height: 0.86;
+  }
+
+  /* Bottom download */
+
+  .resume-download-button {
+    width: 130px;
+
+    min-height: 46px;
+
+    margin-top: 35px;
+
+    padding: 12px 15px;
+
+    font-size: 7px;
+  }
+
+  .resume-download-button span {
+    font-size: 14px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  /* Hero */
+
+  .resume-hero h1 {
+    font-size: 17.5vw;
+  }
+
+  .resume-hero-right > p {
+    font-size: 12px;
+  }
+
+  /* Block title */
+
+  .resume-block-title {
+    gap: 13px;
+  }
+
+  /* Content titles */
+
+  .resume-experience h3,
+  .resume-education h3,
+  .resume-project h3 {
+    font-size: 19px;
+  }
+
+  /* Skills */
+
+  .resume-skills {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-skill {
+    min-height: 55px;
+  }
+
+  /* CTA */
+
+  .resume-cta h2 {
+    font-size: 14.5vw;
+  }
+
+  /* Download button */
+
+  .resume-download-button {
+    width: 125px;
+
+    min-height: 44px;
+
+    padding: 11px 14px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  /* Disable transitions */
+
+  .resume-reveal,
+  .resume-download-top,
+  .resume-project,
+  .resume-project h3,
+  .resume-project-arrow,
+  .resume-skill,
+  .resume-download-button {
+    transition: none !important;
+  }
+
+  /* Disable status animation */
+
+  .status-dot::after {
+    animation: none;
+  }
+
+  /* Show reveal content immediately */
+
+  .resume-reveal {
+    opacity: 1;
+
+    transform: none;
+  }
+}

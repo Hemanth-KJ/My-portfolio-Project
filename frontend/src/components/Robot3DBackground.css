@@ -1,0 +1,40 @@
+.robot-3d-background {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: calc(100vh - 76px);
+
+  z-index: 0;
+  pointer-events: none;
+
+  overflow: hidden;
+
+  opacity: 0.65;
+}
+
+.robot-3d-background canvas {
+  display: block;
+
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width: 900px) {
+  .robot-3d-background {
+    top: 70px;
+    height: calc(100vh - 70px);
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 600px) {
+  .robot-3d-background {
+    top: 68px;
+    height: calc(100vh - 68px);
+    opacity: 0.2;
+  }
+}

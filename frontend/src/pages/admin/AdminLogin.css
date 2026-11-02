@@ -1,0 +1,784 @@
+/* =========================================================
+   ADMIN LOGIN PAGE
+========================================================= */
+
+.admin-login-page {
+  position: relative;
+  isolation: isolate;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  padding: 30px 5% 24px;
+
+  overflow: hidden;
+
+  background: #fff;
+  color: #050505;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+.admin-login-grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  pointer-events: none;
+  opacity: 0.45;
+
+  background-image:
+    linear-gradient(
+      rgba(0, 0, 0, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 80px 80px;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.admin-login-topbar {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.admin-login-logo {
+  color: #050505;
+  text-decoration: none;
+
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: -0.08em;
+}
+
+.admin-login-logo span {
+  color: #888;
+}
+
+.admin-login-top-label {
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: #777;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.admin-login-container {
+  position: relative;
+  z-index: 2;
+
+  width: min(1200px, 100%);
+
+  margin: 65px auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 0.78fr);
+
+  align-items: center;
+
+  gap: 100px;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.admin-login-intro {
+  min-width: 0;
+}
+
+.admin-login-index {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+  margin-bottom: 38px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: #777;
+}
+
+.admin-login-index span:first-child {
+  color: #050505;
+}
+
+.admin-login-eyebrow {
+  margin: 0 0 20px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.admin-login-title {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0;
+
+  font-size: clamp(65px, 7.5vw, 108px);
+  font-weight: 900;
+  line-height: 0.86;
+  letter-spacing: -0.075em;
+}
+
+.admin-login-title > span {
+  display: block;
+  width: fit-content;
+
+  transition:
+    transform 0.4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.admin-login-title > span:hover {
+  transform: translateX(8px);
+}
+
+.admin-login-outline {
+  color: transparent;
+
+  -webkit-text-stroke: 1.5px #050505;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.admin-login-description {
+  max-width: 430px;
+
+  margin: 32px 0 0;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.8;
+
+  color: #666;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.admin-login-status {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+  margin-top: 35px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  color: #777;
+}
+
+.admin-login-status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+  background: #111;
+
+  animation: adminLoginPulse 2s ease-in-out infinite;
+}
+
+@keyframes adminLoginPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+}
+
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.admin-login-card {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 38px;
+
+  border: 1px solid rgba(0, 0, 0, 0.14);
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.035);
+}
+
+
+/* =========================================================
+   CARD HEADER
+========================================================= */
+
+.admin-login-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 28px;
+  margin-bottom: 30px;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.admin-login-card-kicker {
+  margin: 0 0 12px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  color: #777;
+}
+
+.admin-login-card-heading h2 {
+  margin: 0;
+
+  font-size: 38px;
+  font-weight: 900;
+  line-height: 1;
+
+  letter-spacing: -0.06em;
+}
+
+.admin-login-card-number {
+  padding-top: 3px;
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+.admin-login-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+}
+
+.admin-login-field label {
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  color: #555;
+}
+
+.admin-login-field input {
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+
+  padding: 0 14px;
+
+  border: 1px solid #ddd;
+  border-radius: 0;
+
+  outline: none;
+
+  background: #fff;
+  color: #050505;
+
+  font-family: inherit;
+  font-size: 12px;
+
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.admin-login-field input::placeholder {
+  color: #aaa;
+}
+
+.admin-login-field input:focus {
+  border-color: #111;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.045);
+}
+
+.admin-login-field input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   PASSWORD FIELD
+========================================================= */
+
+.admin-login-password-wrap {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.admin-login-password-wrap input {
+  padding-right: 65px;
+}
+
+.admin-login-password-toggle {
+  position: absolute;
+  right: 13px;
+
+  padding: 7px 0;
+
+  border: none;
+  background: transparent;
+
+  color: #666;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+
+  cursor: pointer;
+
+  transition: color 0.2s ease;
+}
+
+.admin-login-password-toggle:hover {
+  color: #050505;
+}
+
+.admin-login-password-toggle:disabled {
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ERROR MESSAGE
+========================================================= */
+
+.admin-login-error {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin: -5px 0 0;
+  padding: 12px;
+
+  border: 1px solid #e6caca;
+
+  background: #fff8f8;
+  color: #a12626;
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.admin-login-error span {
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.admin-login-submit {
+  position: relative;
+
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  overflow: hidden;
+
+  border: 1px solid #050505;
+
+  background: #050505;
+  color: #fff;
+
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+
+  cursor: pointer;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.admin-login-submit::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: #fff;
+
+  transform: translateY(101%);
+
+  transition:
+    transform 0.4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.admin-login-submit > span {
+  position: relative;
+  z-index: 1;
+}
+
+.admin-login-submit:hover:not(:disabled) {
+  color: #050505;
+  transform: translateY(-2px);
+}
+
+.admin-login-submit:hover:not(:disabled)::before {
+  transform: translateY(0);
+}
+
+.admin-login-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.admin-login-submit-arrow {
+  font-size: 17px;
+  line-height: 1;
+}
+
+
+/* =========================================================
+   FORM NOTE
+========================================================= */
+
+.admin-login-form-note {
+  margin: -8px 0 0;
+
+  text-align: center;
+
+  font-size: 10px;
+  line-height: 1.6;
+
+  color: #999;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.admin-login-footer {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+  font-family: "JetBrains Mono", monospace;
+
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+
+  color: #888;
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1100px) {
+  .admin-login-container {
+    gap: 55px;
+  }
+
+  .admin-login-title {
+    font-size: clamp(60px, 7.5vw, 88px);
+  }
+
+  .admin-login-card {
+    padding: 30px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 800px) {
+  .admin-login-page {
+    padding: 24px 5% 20px;
+  }
+
+  .admin-login-container {
+    width: min(550px, 100%);
+
+    grid-template-columns: 1fr;
+    gap: 45px;
+
+    margin: 55px auto;
+  }
+
+  .admin-login-title {
+    font-size: clamp(65px, 12vw, 90px);
+  }
+
+  .admin-login-description {
+    max-width: 500px;
+    margin-top: 25px;
+  }
+
+  .admin-login-index {
+    margin-bottom: 28px;
+  }
+
+  .admin-login-status {
+    margin-top: 25px;
+  }
+
+  .admin-login-card {
+    padding: 32px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .admin-login-grid {
+    background-size: 55px 55px;
+  }
+
+  .admin-login-topbar {
+    padding-bottom: 18px;
+  }
+
+  .admin-login-logo {
+    font-size: 23px;
+  }
+
+  .admin-login-top-label {
+    font-size: 8px;
+  }
+
+  .admin-login-container {
+    gap: 35px;
+    margin: 45px auto;
+  }
+
+  .admin-login-index {
+    gap: 12px;
+    margin-bottom: 26px;
+
+    font-size: 7px;
+  }
+
+  .admin-login-eyebrow {
+    font-size: 8px;
+  }
+
+  .admin-login-title {
+    font-size: clamp(55px, 13.5vw, 78px);
+  }
+
+  .admin-login-outline {
+    -webkit-text-stroke: 1px #050505;
+  }
+
+  .admin-login-description {
+    margin-top: 25px;
+    font-size: 13px;
+  }
+
+  .admin-login-card {
+    padding: 25px 20px;
+  }
+
+  .admin-login-card-heading {
+    padding-bottom: 23px;
+    margin-bottom: 25px;
+  }
+
+  .admin-login-card-heading h2 {
+    font-size: 33px;
+  }
+
+  .admin-login-form {
+    gap: 21px;
+  }
+
+  .admin-login-footer {
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    font-size: 7px;
+  }
+
+  .admin-login-footer span:nth-child(2) {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .admin-login-page {
+    padding: 20px 5% 16px;
+  }
+
+  .admin-login-container {
+    margin: 38px auto;
+    gap: 30px;
+  }
+
+  .admin-login-title {
+    font-size: clamp(48px, 13.5vw, 60px);
+    letter-spacing: -0.06em;
+  }
+
+  .admin-login-description {
+    font-size: 12px;
+  }
+
+  .admin-login-card {
+    padding: 23px 16px;
+  }
+
+  .admin-login-card-number {
+    font-size: 6px;
+  }
+
+  .admin-login-field input {
+    height: 47px;
+    font-size: 11px;
+  }
+
+  .admin-login-submit {
+    min-height: 49px;
+  }
+
+  .admin-login-footer {
+    font-size: 6px;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-title > span,
+  .admin-login-submit,
+  .admin-login-submit::before,
+  .admin-login-field input,
+  .admin-login-password-toggle,
+  .admin-login-status-dot {
+    animation: none !important;
+    transition: none !important;
+  }
+}
