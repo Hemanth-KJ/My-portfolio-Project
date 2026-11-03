@@ -1,71 +1,42 @@
+import dotenv from "dotenv";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import pool from "../config/db.js";
 
-export const loginAdmin = async (req, res, next) => {
+dotenv.config();
+
+const seedAdmin = async () => {
   try {
-    const email = req.body.email?.trim().toLowerCase();
-    const password = req.body.password;
+    const email = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+    const password = process.env.ADMIN_PASSWORD;
 
-    if (!email || typeof password !== "string" || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Email and password are required.",
-      });
+    if (!email || !password) {
+      throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env");
     }
 
-    const result = await pool.query(
-      `SELECT id, email, password_hash, role, is_active
-       FROM admins
-       WHERE email = $1
-       LIMIT 1`,
-      [email]
-    );
-
-    const admin = result.rows[0];
-
-    if (!admin || !admin.is_active || !admin.password_hash) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password.",
-      });
+    if (password.length < 12) {
+      throw new Error("Admin password must contain at least 12 characters.");
     }
 
-    const passwordMatches = await bcrypt.compare(
-      password,
-      admin.password_hash
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    await pool.query(
+      `INSERT INTO admins (email, password_hash)
+       VALUES ($1, $2)
+       ON CONFLICT (email)
+       DO UPDATE SET
+         password_hash = EXCLUDED.password_hash,
+         is_active = TRUE,
+         updated_at = CURRENT_TIMESTAMP`,
+      [email, passwordHash]
     );
 
-    if (!passwordMatches) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password.",
-      });
-    }
-
-    const token = jwt.sign(
-      {
-        id: admin.id,
-        email: admin.email,
-        role: admin.role,
-      },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    return res.status(200).json({
-      success: true,
-      message: "Login successful.",
-      data: {
-        token,
-        admin: {
-          id: admin.id,
-          email: admin.email,
-          role: admin.role,
-        },
-      },
-    });
+    console.log(`Admin account seeded: ${email}`);
   } catch (error) {
-    next(error);
+    console.error("Failed to seed admin:", error.message);
+    process.exitCode = 1;
+  } finally {
+    await pool.end();
   }
 };
+
+seedAdmin();
