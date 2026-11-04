@@ -260,7 +260,7 @@ function Home() {
             <div className="visual-image-wrapper">
 
               <img
-                src={heroImage}
+                src={homeData?.heroImage || heroImage}
                 alt={homeData.eyebrow}
                 className="hero-image"
                 style={{

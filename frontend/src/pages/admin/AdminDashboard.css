@@ -414,6 +414,18 @@
   letter-spacing: 1px;
 }
 
+.admin-module-link {
+  color: #111;
+  font-size: 10px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.admin-module-link:hover {
+  opacity: 0.55;
+}
+
 @media (min-width: 1500px) {
   .admin-dashboard-main {
     padding-right: 7%;

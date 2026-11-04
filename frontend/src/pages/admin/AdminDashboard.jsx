@@ -8,6 +8,7 @@ const managementSections = [
     title: "Home",
     description: "Manage your portfolio introduction and hero content.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/home",
   },
   {
     number: "02",
@@ -54,14 +55,13 @@ function AdminDashboard() {
   const token = sessionStorage.getItem("adminToken");
   const storedAdmin = sessionStorage.getItem("adminUser");
 
-
- const admin = (() => {
-  try {
-    return storedAdmin ? JSON.parse(storedAdmin) : null;
-  } catch {
-    return null;
-  }
-})();
+  const admin = (() => {
+    try {
+      return storedAdmin ? JSON.parse(storedAdmin) : null;
+    } catch {
+      return null;
+    }
+  })();
 
   const hasValidStoredAdmin =
     Boolean(token) &&
@@ -107,18 +107,12 @@ function AdminDashboard() {
         <div className="admin-sidebar-label">WORKSPACE</div>
 
         <nav className="admin-sidebar-nav">
-          <a
-            href="#overview"
-            className="admin-sidebar-link active"
-          >
+          <a href="#overview" className="admin-sidebar-link active">
             <span className="admin-nav-number">01</span>
             Overview
           </a>
 
-          <a
-            href="#management"
-            className="admin-sidebar-link"
-          >
+          <a href="#management" className="admin-sidebar-link">
             <span className="admin-nav-number">02</span>
             Portfolio content
           </a>
@@ -137,9 +131,7 @@ function AdminDashboard() {
       <section className="admin-dashboard-main">
         <header className="admin-dashboard-topbar">
           <div>
-            <p className="admin-dashboard-breadcrumb">
-              WORKSPACE / OVERVIEW
-            </p>
+            <p className="admin-dashboard-breadcrumb">WORKSPACE / OVERVIEW</p>
 
             <h1>
               Dashboard<span>.</span>
@@ -159,9 +151,7 @@ function AdminDashboard() {
 
         <section className="admin-welcome-panel" id="overview">
           <div>
-            <p className="admin-section-kicker">
-              PORTFOLIO MANAGEMENT SYSTEM
-            </p>
+            <p className="admin-section-kicker">PORTFOLIO MANAGEMENT SYSTEM</p>
 
             <h2>
               Welcome back,
@@ -170,8 +160,8 @@ function AdminDashboard() {
             </h2>
 
             <p className="admin-welcome-description">
-              Your workspace is ready. Manage your portfolio
-              content from one central location.
+              Your workspace is ready. Manage your portfolio content from one
+              central location.
             </p>
           </div>
 
@@ -203,15 +193,10 @@ function AdminDashboard() {
           </article>
         </section>
 
-        <section
-          className="admin-management-section"
-          id="management"
-        >
+        <section className="admin-management-section" id="management">
           <div className="admin-management-heading">
             <div>
-              <p className="admin-section-kicker">
-                CONTENT / DIRECTORY
-              </p>
+              <p className="admin-section-kicker">CONTENT / DIRECTORY</p>
 
               <h2>Manage your portfolio.</h2>
             </div>
@@ -221,16 +206,11 @@ function AdminDashboard() {
 
           <div className="admin-management-grid">
             {managementSections.map((section) => (
-              <article
-                className="admin-management-card"
-                key={section.number}
-              >
+              <article className="admin-management-card" key={section.number}>
                 <div className="admin-management-card-top">
                   <span>{section.number}</span>
 
-                  <span className="admin-management-indicator">
-                    ↗
-                  </span>
+                  <span className="admin-management-indicator">↗</span>
                 </div>
 
                 <h3>{section.title}</h3>
@@ -240,9 +220,13 @@ function AdminDashboard() {
                 <div className="admin-management-card-footer">
                   <span>{section.status}</span>
 
-                  <span className="admin-module-pending">
-                    SETUP PENDING
-                  </span>
+                  {section.path ? (
+                    <Link to={section.path} className="admin-module-link">
+                      MANAGE CONTENT ↗
+                    </Link>
+                  ) : (
+                    <span className="admin-module-pending">SETUP PENDING</span>
+                  )}
                 </div>
               </article>
             ))}
@@ -252,9 +236,7 @@ function AdminDashboard() {
         <footer className="admin-dashboard-footer">
           <span>HKJ / ADMIN WORKSPACE</span>
 
-          <span>
-            © {new Date().getFullYear()} HEMANTH K J
-          </span>
+          <span>© {new Date().getFullYear()} HEMANTH K J</span>
         </footer>
       </section>
     </main>

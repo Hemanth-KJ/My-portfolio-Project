@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { ShieldCheck } from "lucide-react";
 
 import "./Navbar.css";
-
 
 // =========================================================
 // NAVIGATION ITEMS
@@ -18,68 +18,36 @@ const navItems = [
   { name: "Contact", path: "/contact" },
 ];
 
-
 // =========================================================
 // NAVBAR COMPONENT
 // =========================================================
 
 function Navbar() {
-  // -------------------------------------------------------
-  // Mobile menu state
-  // -------------------------------------------------------
-
   const [menuOpen, setMenuOpen] = useState(false);
-
-
-  // -------------------------------------------------------
-  // Close mobile menu
-  // -------------------------------------------------------
 
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
-
-  // =======================================================
-  // COMPONENT UI
-  // =======================================================
-
   return (
-    <header
-      className={`navbar ${menuOpen ? "is-open" : ""}`}
-    >
-
-      {/* ==================================================
-          NAVBAR INNER
-          ================================================== */}
-
+    <header className={`navbar ${menuOpen ? "is-open" : ""}`}>
       <div className="navbar-inner">
 
-        {/* ==================================================
-            LOGO
-            ================================================== */}
-
+        {/* LOGO */}
         <Link
           to="/"
           className="navbar-logo"
           onClick={closeMenu}
         >
-          <span className="logo-box">
-            H
-          </span>
+          <span className="logo-box">H</span>
 
           <span className="logo-text">
             HEMANTH K J
           </span>
         </Link>
 
-
-        {/* ==================================================
-            DESKTOP NAVIGATION
-            ================================================== */}
-
+        {/* DESKTOP NAVIGATION */}
         <nav className="navbar-links">
-
           {navItems.map((item) => (
             <NavLink
               key={item.path}
@@ -89,77 +57,58 @@ function Navbar() {
                 `nav-link ${isActive ? "active" : ""}`
               }
             >
-              <span>
-                {item.name}
-              </span>
+              <span>{item.name}</span>
             </NavLink>
           ))}
-
         </nav>
 
+        {/* RIGHT ACTIONS */}
+        <div className="navbar-actions">
 
-        {/* ==================================================
-            MOBILE MENU BUTTON
-            ================================================== */}
+          {/* ADMIN ICON */}
+          <Link
+            to="/admin"
+            className="admin-nav-link"
+            onClick={closeMenu}
+            aria-label="Admin Login"
+            title="Admin Login"
+          >
+            <ShieldCheck size={19} strokeWidth={1.8} />
+          </Link>
 
-        <button
-          type="button"
-          className={`menu-button ${
-            menuOpen ? "open" : ""
-          }`}
-          onClick={() =>
-            setMenuOpen((value) => !value)
-          }
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-        >
+          {/* MOBILE MENU BUTTON */}
+          <button
+            type="button"
+            className={`menu-button ${menuOpen ? "open" : ""}`}
+            onClick={() => setMenuOpen((value) => !value)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
+          >
+            <span className="menu-label">
+              {menuOpen ? "CLOSE" : "MENU"}
+            </span>
 
-          {/* Menu / Close label */}
-          <span className="menu-label">
-            {menuOpen ? "CLOSE" : "MENU"}
-          </span>
+            <span className="menu-icon">
+              <i />
+              <i />
+            </span>
+          </button>
 
-
-          {/* Menu icon */}
-          <span className="menu-icon">
-            <i />
-            <i />
-          </span>
-
-        </button>
-
+        </div>
       </div>
 
-
-      {/* ====================================================
-          MOBILE MENU
-          ==================================================== */}
-
+      {/* MOBILE MENU */}
       <div className="mobile-menu">
-
         <div className="mobile-menu-content">
 
-          {/* ==================================================
-              MOBILE MENU HEADER
-              ================================================== */}
-
+          {/* MOBILE HEADER */}
           <div className="mobile-menu-header">
-            <span>
-              INDEX / 00
-            </span>
-
-            <span>
-              PORTFOLIO / 2026
-            </span>
+            <span>INDEX / 00</span>
+            <span>PORTFOLIO / 2026</span>
           </div>
 
-
-          {/* ==================================================
-              MOBILE NAVIGATION
-              ================================================== */}
-
+          {/* MOBILE NAVIGATION */}
           <nav className="mobile-navigation">
-
             {navItems.map((item, index) => (
               <NavLink
                 key={item.path}
@@ -170,81 +119,43 @@ function Navbar() {
                   "--delay": `${index * 0.07}s`,
                 }}
                 className={({ isActive }) =>
-                  `mobile-nav-link ${
-                    isActive ? "active" : ""
-                  }`
+                  `mobile-nav-link ${isActive ? "active" : ""}`
                 }
               >
-
-                {/* Navigation index */}
                 <span className="mobile-index">
                   {String(index + 1).padStart(2, "0")}
                 </span>
 
-
-                {/* Navigation name */}
                 <span className="mobile-name">
                   {item.name}
                 </span>
 
-
-                {/* Navigation separator line */}
                 <span className="mobile-line" />
 
-
-                {/* Navigation arrow */}
                 <span className="mobile-arrow">
                   ↗
                 </span>
-
               </NavLink>
             ))}
-
           </nav>
 
-
-          {/* ==================================================
-              MOBILE MENU FOOTER
-              ================================================== */}
-
+          {/* MOBILE FOOTER */}
           <div className="mobile-menu-footer">
-
-            {/* Professional information */}
             <div>
-              <span>
-                SOFTWARE ENGINEER
-              </span>
-
-              <span>
-                FULL STACK DEVELOPER
-              </span>
+              <span>SOFTWARE ENGINEER</span>
+              <span>FULL STACK DEVELOPER</span>
             </div>
 
-
-            {/* Location and year */}
             <div>
-              <span>
-                INDIA
-              </span>
-
-              <span>
-                2026
-              </span>
+              <span>INDIA</span>
+              <span>2026</span>
             </div>
-
           </div>
 
         </div>
-
       </div>
-
     </header>
   );
 }
-
-
-// =========================================================
-// EXPORT
-// =========================================================
 
 export default Navbar;

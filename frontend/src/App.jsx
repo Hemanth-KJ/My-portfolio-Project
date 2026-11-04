@@ -18,9 +18,11 @@ import Contact from "./pages/Contact";
 import "./components/GlassPanel.css";
 import "./App.css";
 
+import ProtectedAdminRoute from "./pages/admin/ProtectedAdminRoute";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
+import AdminHome from "./pages/admin/adminpages/AdminHome";
 function App() {
   return (
     <BrowserRouter>
@@ -81,7 +83,10 @@ function App() {
 
             <Route path="/admin" element={<AdminLogin />} />
 
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route element={<ProtectedAdminRoute />}>
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/admin/home" element={<AdminHome />} />
+            </Route>
           </Routes>
         </main>
       </div>
