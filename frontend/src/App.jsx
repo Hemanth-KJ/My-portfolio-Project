@@ -23,6 +23,7 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
 import AdminHome from "./pages/admin/adminpages/AdminHome";
+import AdminAbout from "./pages/admin/adminpages/AdminAbout";
 function App() {
   return (
     <BrowserRouter>
@@ -86,6 +87,7 @@ function App() {
             <Route element={<ProtectedAdminRoute />}>
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/home" element={<AdminHome />} />
+              <Route path="/admin/about" element={<AdminAbout />} />
             </Route>
           </Routes>
         </main>

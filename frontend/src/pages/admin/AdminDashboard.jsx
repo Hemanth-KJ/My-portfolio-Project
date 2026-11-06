@@ -15,6 +15,7 @@ const managementSections = [
     title: "About",
     description: "Update your profile, biography and personal details.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/about",
   },
   {
     number: "03",
