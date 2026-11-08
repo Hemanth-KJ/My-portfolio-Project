@@ -36,6 +36,7 @@ const managementSections = [
     title: "Projects",
     description: "Add, edit and organize your portfolio projects.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/projects"
   },
   {
     number: "06",
