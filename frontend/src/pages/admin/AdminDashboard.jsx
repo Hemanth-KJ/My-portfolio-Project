@@ -22,6 +22,7 @@ const managementSections = [
     title: "Education",
     description: "Manage academic qualifications and education history.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/education",
   },
   {
     number: "04",

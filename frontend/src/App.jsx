@@ -24,6 +24,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 
 import AdminHome from "./pages/admin/adminpages/AdminHome";
 import AdminAbout from "./pages/admin/adminpages/AdminAbout";
+import AdminEducation from "./pages/admin/adminpages/AdminEducation";
 function App() {
   return (
     <BrowserRouter>
@@ -88,6 +89,7 @@ function App() {
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/admin/home" element={<AdminHome />} />
               <Route path="/admin/about" element={<AdminAbout />} />
+              <Route path="/admin/education" element={<AdminEducation />} />
             </Route>
           </Routes>
         </main>
