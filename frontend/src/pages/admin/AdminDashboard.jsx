@@ -50,6 +50,7 @@ const managementSections = [
     title: "Contact",
     description: "Review and update your contact information.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/contact"
   },
 ];
 

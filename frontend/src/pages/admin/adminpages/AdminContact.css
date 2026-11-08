@@ -1,0 +1,473 @@
+
+/* =========================================================
+   ADMIN CONTACT PAGE
+========================================================= */
+
+.admin-contact {
+  width: 100%;
+  min-height: 100vh;
+  padding: 42px clamp(18px, 4vw, 56px) 70px;
+  background: #fafafa;
+  color: #111;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-contact-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-contact-back {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.admin-contact-back:hover {
+  color: #000;
+}
+
+.admin-contact-eyebrow {
+  margin: 0 0 10px;
+  color: #777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.admin-contact-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.admin-contact-subtitle {
+  max-width: 650px;
+  margin: 12px 0 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-contact-preview {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 18px;
+  border: 1px solid #222;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.admin-contact-preview:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.admin-contact-alert {
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  font-size: 13px;
+}
+
+.admin-contact-alert.error {
+  background: #fff3f3;
+  border-color: #e2aaaa;
+  color: #9d2525;
+}
+
+.admin-contact-alert.success {
+  background: #f0faf2;
+  border-color: #a7c9ae;
+  color: #226333;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-contact-panel {
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.admin-contact-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 27px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-contact-section-heading > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid #ddd;
+  color: #555;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-contact-section-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.admin-contact-section-heading p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.admin-contact-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-contact-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.admin-contact-field.full {
+  grid-column: 1 / -1;
+}
+
+.admin-contact-field > span {
+  color: #333;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.admin-contact-field input,
+.admin-contact-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #dedede;
+  border-radius: 0;
+  outline: none;
+  background: #fcfcfc;
+  color: #111;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.admin-contact-field input {
+  min-height: 46px;
+}
+
+.admin-contact-field textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-contact-field input:focus,
+.admin-contact-field textarea:focus {
+  border-color: #111;
+  background: #fff;
+}
+
+.admin-contact-field input::placeholder,
+.admin-contact-field textarea::placeholder {
+  color: #aaa;
+}
+
+/* =========================================================
+   LINKS HEADER
+========================================================= */
+
+.admin-contact-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 18px;
+}
+
+.admin-contact-list-heading h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.admin-contact-list-heading p {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.admin-contact-list-heading > button {
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-contact-list-heading > button:hover:not(:disabled) {
+  background: #fff;
+  color: #111;
+}
+
+.admin-contact-list-heading > button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   CONTACT LINKS
+========================================================= */
+
+.admin-contact-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-contact-link-item {
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  background: #fdfdfd;
+}
+
+.admin-contact-link-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-contact-link-top > div:first-child {
+  min-width: 0;
+}
+
+.admin-contact-link-top span {
+  color: #777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.admin-contact-link-top h3 {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   REORDER / REMOVE
+========================================================= */
+
+.admin-contact-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.admin-contact-actions button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.admin-contact-actions button:hover:not(:disabled) {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+.admin-contact-actions button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.admin-contact-actions button.remove {
+  color: #a52a2a;
+}
+
+/* =========================================================
+   LINK PREVIEW
+========================================================= */
+
+.admin-contact-test-link {
+  display: inline-block;
+  margin-top: 15px;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.admin-contact-empty {
+  padding: 30px 15px;
+  border: 1px dashed #ddd;
+  color: #888;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* =========================================================
+   NOTES
+========================================================= */
+
+.admin-contact-note {
+  margin: 22px 0 0;
+  padding: 14px 16px;
+  border-left: 2px solid #111;
+  background: #f7f7f7;
+  color: #666;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================================
+   SAVE BAR
+========================================================= */
+
+.admin-contact-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.admin-contact-save-bar p {
+  margin: 0;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-contact-save-bar button {
+  min-width: 160px;
+  min-height: 50px;
+  padding: 0 20px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-contact-save-bar button:hover:not(:disabled) {
+  background: #fff;
+  color: #111;
+}
+
+.admin-contact-save-bar button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-contact-loading {
+  display: flex;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  color: #777;
+  font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+  .admin-contact {
+    padding: 28px 16px 50px;
+  }
+
+  .admin-contact-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-contact-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-contact-field.full {
+    grid-column: auto;
+  }
+
+  .admin-contact-list-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-contact-link-top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .admin-contact-save-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-contact-save-bar button {
+    width: 100%;
+  }
+}
