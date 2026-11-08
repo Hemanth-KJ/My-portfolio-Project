@@ -29,6 +29,7 @@ const managementSections = [
     title: "Skills",
     description: "Update technical skills and proficiency information.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/skills"
   },
   {
     number: "05",

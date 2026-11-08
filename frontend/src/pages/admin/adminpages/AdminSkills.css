@@ -1,0 +1,540 @@
+
+/* =========================================================
+   ADMIN SKILLS PAGE
+========================================================= */
+
+.admin-skills-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 42px clamp(18px, 4vw, 56px) 70px;
+  color: #111;
+  background: #fafafa;
+}
+
+.admin-skills-container {
+  width: 100%;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-skills-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-skills-back {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.admin-skills-back:hover {
+  color: #000;
+}
+
+.admin-skills-eyebrow {
+  margin: 0 0 10px;
+  color: #777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.admin-skills-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.admin-skills-subtitle {
+  margin: 12px 0 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-skills-preview {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 18px;
+  border: 1px solid #222;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.admin-skills-preview:hover {
+  color: #fff;
+  background: #111;
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.admin-skills-alert {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border: 1px solid;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.admin-skills-alert.error {
+  border-color: #e2aaaa;
+  color: #9d2525;
+  background: #fff3f3;
+}
+
+.admin-skills-alert.success {
+  border-color: #a7c9ae;
+  color: #226333;
+  background: #f0faf2;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-skills-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.admin-skills-card {
+  margin: 0;
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.admin-skills-card-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 27px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-skills-card-heading > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid #ddd;
+  color: #555;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-skills-card-heading > div:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-skills-card-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.admin-skills-card-heading p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-skills-heading-action {
+  margin-left: auto;
+}
+
+/* =========================================================
+   FIELDS
+========================================================= */
+
+.admin-skills-fields,
+.admin-skills-fields.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-skills-fields.three-columns {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.admin-skills-fields > .full-width {
+  grid-column: 1 / -1;
+}
+
+.admin-skills-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.admin-skills-field > span {
+  color: #333;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.admin-skills-field input,
+.admin-skills-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #dedede;
+  border-radius: 0;
+  outline: none;
+  color: #111;
+  background: #fcfcfc;
+  font: inherit;
+  font-size: 13px;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.admin-skills-field input {
+  min-height: 46px;
+}
+
+.admin-skills-field textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-skills-field input:focus,
+.admin-skills-field textarea:focus {
+  border-color: #111;
+  background: #fff;
+}
+
+.admin-skills-field input::placeholder,
+.admin-skills-field textarea::placeholder {
+  color: #aaa;
+  opacity: 1;
+}
+
+/* =========================================================
+   ADD BUTTONS
+========================================================= */
+
+.admin-skills-add {
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid #111;
+  color: #fff;
+  background: #111;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.admin-skills-add:hover:not(:disabled) {
+  color: #111;
+  background: #fff;
+}
+
+.admin-skills-add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   CATEGORY LIST
+========================================================= */
+
+.admin-skills-category-list,
+.admin-skills-skill-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-skills-category {
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  background: #fdfdfd;
+}
+
+.admin-skills-item-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-skills-item-heading > div:first-child > span {
+  color: #777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.admin-skills-item-heading h3,
+.admin-skills-item-heading h4 {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0;
+}
+
+.admin-skills-item-heading h4 {
+  font-size: 12px;
+}
+
+/* =========================================================
+   REORDER / DELETE BUTTONS
+========================================================= */
+
+.admin-skills-item-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.admin-skills-item-actions button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e3e3e3;
+  color: #333;
+  background: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.admin-skills-item-actions button:hover:not(:disabled) {
+  border-color: #111;
+  color: #fff;
+  background: #111;
+}
+
+.admin-skills-item-actions button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.admin-skills-item-actions button.remove {
+  color: #a52a2a;
+}
+
+/* =========================================================
+   TECHNOLOGY SUBSECTION
+========================================================= */
+
+.admin-skills-subheading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 18px;
+  padding-top: 22px;
+  border-top: 1px solid #eee;
+}
+
+.admin-skills-subheading span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 750;
+  color: #111;
+  letter-spacing: 0;
+}
+
+.admin-skills-subheading p {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+/* =========================================================
+   SKILL ITEMS
+========================================================= */
+
+.admin-skills-skill {
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+.admin-skills-empty {
+  padding: 18px 0;
+  color: #888;
+  font-size: 13px;
+}
+
+/* =========================================================
+   SAVE BAR
+========================================================= */
+
+.admin-skills-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.admin-skills-save-bar > span {
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-skills-save-bar button {
+  min-width: 160px;
+  min-height: 50px;
+  padding: 0 20px;
+  border: 1px solid #111;
+  color: #fff;
+  background: #111;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.admin-skills-save-bar button:hover:not(:disabled) {
+  color: #111;
+  background: #fff;
+}
+
+.admin-skills-save-bar button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-skills-loading {
+  display: flex;
+  min-height: 60vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: #777;
+  background: #fafafa;
+  font-size: 13px;
+}
+
+.admin-skills-spinner {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #ddd;
+  border-top-color: #111;
+  border-radius: 50%;
+  animation: admin-skills-spin 0.8s linear infinite;
+}
+
+@keyframes admin-skills-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+  .admin-skills-page {
+    padding: 28px 16px 50px;
+  }
+
+  .admin-skills-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-skills-preview {
+    align-self: flex-start;
+  }
+
+  .admin-skills-fields,
+  .admin-skills-fields.two-columns,
+  .admin-skills-fields.three-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-skills-fields > .full-width {
+    grid-column: auto;
+  }
+
+  .admin-skills-card-heading {
+    flex-wrap: wrap;
+  }
+
+  .admin-skills-heading-action {
+    width: 100%;
+    margin-left: 50px;
+  }
+
+  .admin-skills-subheading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-skills-item-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .admin-skills-save-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-skills-save-bar button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-skills-page *,
+  .admin-skills-page *::before,
+  .admin-skills-page *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
