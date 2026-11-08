@@ -27,6 +27,7 @@ import AdminAbout from "./pages/admin/adminpages/AdminAbout";
 import AdminEducation from "./pages/admin/adminpages/AdminEducation";
 import AdminSkills from "./pages/admin/adminpages/AdminSkills";
 import AdminProjects from "./pages/admin/adminpages/AdminProjects";
+import AdminResume from "./pages/admin/adminpages/AdminResume";
 function App() {
   return (
     <BrowserRouter>
@@ -94,6 +95,7 @@ function App() {
               <Route path="/admin/education" element={<AdminEducation />} />
               <Route path="/admin/skills" element={<AdminSkills />} />
               <Route path="/admin/projects" element={<AdminProjects />} />
+              <Route path="/admin/resume" element={<AdminResume />} />
             </Route>
           </Routes>
         </main>

@@ -1,0 +1,479 @@
+
+/* =========================================================
+   ADMIN RESUME PAGE
+========================================================= */
+
+.admin-resume {
+  width: 100%;
+  min-height: 100vh;
+  padding: 42px clamp(18px, 4vw, 56px) 70px;
+  background: #fafafa;
+  color: #111;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.admin-resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.admin-resume-back {
+  display: inline-block;
+  margin-bottom: 25px;
+  color: #555;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.admin-resume-back:hover {
+  color: #000;
+}
+
+.admin-resume-eyebrow {
+  margin: 0 0 10px;
+  color: #777;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.admin-resume-header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.admin-resume-subtitle {
+  margin: 12px 0 0;
+  color: #777;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.admin-resume-preview {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 18px;
+  border: 1px solid #222;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.admin-resume-preview:hover {
+  background: #111;
+  color: #fff;
+}
+
+/* =========================================================
+   ALERTS
+========================================================= */
+
+.admin-resume-alert {
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  border: 1px solid;
+  font-size: 13px;
+}
+
+.admin-resume-alert.error {
+  background: #fff3f3;
+  border-color: #e2aaaa;
+  color: #9d2525;
+}
+
+.admin-resume-alert.success {
+  background: #f0faf2;
+  border-color: #a7c9ae;
+  color: #226333;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.admin-resume-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.admin-resume-panel {
+  padding: clamp(20px, 3vw, 32px);
+  border: 1px solid #e8e8e8;
+  background: #fff;
+}
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.admin-resume-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 27px;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-resume-section-heading > span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  place-items: center;
+  border: 1px solid #ddd;
+  color: #555;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-resume-section-heading h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.admin-resume-section-heading p {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.admin-resume-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-resume-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.admin-resume-field.full {
+  grid-column: 1 / -1;
+}
+
+.admin-resume-field > span,
+.admin-resume-field > label {
+  color: #333;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.admin-resume-field input,
+.admin-resume-field textarea,
+.admin-resume-skill-row input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #dedede;
+  border-radius: 0;
+  outline: none;
+  background: #fcfcfc;
+  color: #111;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 0.2s ease;
+}
+
+.admin-resume-field input,
+.admin-resume-skill-row input {
+  min-height: 46px;
+}
+
+.admin-resume-field textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.admin-resume-field input:focus,
+.admin-resume-field textarea:focus,
+.admin-resume-skill-row input:focus {
+  border-color: #111;
+  background: #fff;
+}
+
+.admin-resume-field input::placeholder,
+.admin-resume-field textarea::placeholder {
+  color: #aaa;
+}
+
+/* =========================================================
+   LIST HEADER
+========================================================= */
+
+.admin-resume-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 26px 0 18px;
+}
+
+.admin-resume-list-heading h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.admin-resume-list-heading p {
+  margin: 0;
+  color: #888;
+  font-size: 12px;
+}
+
+.admin-resume-list-heading > button {
+  min-height: 42px;
+  padding: 0 15px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-resume-list-heading > button:hover {
+  background: #fff;
+  color: #111;
+}
+
+/* =========================================================
+   REPEAT ITEMS
+========================================================= */
+
+.admin-resume-repeat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-resume-repeat-item {
+  padding: 20px;
+  border: 1px solid #e8e8e8;
+  background: #fdfdfd;
+}
+
+.admin-resume-repeat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.admin-resume-repeat-top strong {
+  color: #777;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.admin-resume-repeat-top h3 {
+  margin: 8px 0 0;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+/* =========================================================
+   REORDER / REMOVE
+========================================================= */
+
+.admin-resume-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.admin-resume-actions button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e3e3e3;
+  background: #fff;
+  color: #333;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.admin-resume-actions button:hover:not(:disabled) {
+  border-color: #111;
+  background: #111;
+  color: #fff;
+}
+
+.admin-resume-actions button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.admin-resume-actions button.remove {
+  color: #a52a2a;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.admin-resume-skills-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-resume-skill-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-resume-skill-row > span {
+  min-width: 20px;
+  color: #999;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.admin-resume-skill-row input {
+  flex: 1;
+}
+
+/* =========================================================
+   PDF LINK
+========================================================= */
+
+.admin-resume-pdf-link {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: 5px;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   SAVE BAR
+========================================================= */
+
+.admin-resume-save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.admin-resume-save-bar p {
+  margin: 0;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.admin-resume-save-bar button {
+  min-width: 160px;
+  min-height: 50px;
+  padding: 0 20px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-resume-save-bar button:hover:not(:disabled) {
+  background: #fff;
+  color: #111;
+}
+
+.admin-resume-save-bar button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+/* =========================================================
+   LOADING
+========================================================= */
+
+.admin-resume-loading {
+  display: flex;
+  min-height: 60vh;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  color: #777;
+  font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+  .admin-resume {
+    padding: 28px 16px 50px;
+  }
+
+  .admin-resume-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-resume-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-resume-field.full {
+    grid-column: auto;
+  }
+
+  .admin-resume-list-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-resume-repeat-top {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .admin-resume-skill-row {
+    flex-wrap: wrap;
+  }
+
+  .admin-resume-skill-row input {
+    min-width: calc(100% - 40px);
+  }
+
+  .admin-resume-save-bar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-resume-save-bar button {
+    width: 100%;
+  }
+}

@@ -43,6 +43,7 @@ const managementSections = [
     title: "Resume",
     description: "Manage your professional resume information.",
     status: "CONTENT MANAGEMENT",
+    path: "/admin/resume"
   },
   {
     number: "07",
