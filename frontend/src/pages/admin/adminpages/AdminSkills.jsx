@@ -368,10 +368,21 @@ function AdminSkills() {
         });
 
         setSuccess("Skills content saved successfully.");
+
+        // Smooth scroll to top to display the error
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       }
     } catch (err) {
       console.error("Failed to save Skills:", err);
       setError(err.response?.data?.message || "Failed to save Skills content.");
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -427,7 +438,7 @@ function AdminSkills() {
           </div>
         )}
 
-       <form className="admin-skills-form" onSubmit={handleSave}>
+        <form className="admin-skills-form" onSubmit={handleSave}>
           <section className="admin-skills-card">
             <SectionHeading
               number="01"
@@ -776,13 +787,7 @@ function AdminSkills() {
   );
 }
 
-
-function SectionHeading({
-  number,
-  title,
-  description,
-  action,
-}) {
+function SectionHeading({ number, title, description, action }) {
   return (
     <div className="admin-skills-card-heading">
       <span>{number}</span>
@@ -792,15 +797,10 @@ function SectionHeading({
         <p>{description}</p>
       </div>
 
-      {action && (
-        <div className="admin-skills-heading-action">
-          {action}
-        </div>
-      )}
+      {action && <div className="admin-skills-heading-action">{action}</div>}
     </div>
   );
 }
-
 
 function Field({ label, value, onChange, maxLength }) {
   return (

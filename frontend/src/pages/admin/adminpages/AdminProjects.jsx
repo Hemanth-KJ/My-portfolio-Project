@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../services/api";
@@ -29,8 +28,7 @@ const emptyData = {
   },
 };
 
-const numberLabel = (index) =>
-  String(index + 1).padStart(2, "0");
+const numberLabel = (index) => String(index + 1).padStart(2, "0");
 
 const normalizeData = (data) => ({
   section: {
@@ -51,9 +49,7 @@ const normalizeData = (data) => ({
         technologies: Array.isArray(project.technologies)
           ? project.technologies
           : [],
-        highlights: Array.isArray(project.highlights)
-          ? project.highlights
-          : [],
+        highlights: Array.isArray(project.highlights) ? project.highlights : [],
       }))
     : [],
   bottom: {
@@ -79,9 +75,7 @@ function AdminProjects() {
         const response = await api.get("/projects");
 
         if (!response.data?.success || !response.data?.data) {
-          throw new Error(
-            "Projects content was not returned by the server."
-          );
+          throw new Error("Projects content was not returned by the server.");
         }
 
         setFormData(normalizeData(response.data.data));
@@ -90,7 +84,7 @@ function AdminProjects() {
         setError(
           err.response?.data?.message ||
             err.message ||
-            "Unable to load Projects content."
+            "Unable to load Projects content.",
         );
       } finally {
         setLoading(false);
@@ -146,7 +140,7 @@ function AdminProjects() {
     setFormData((current) => ({
       ...current,
       projects: current.projects.map((project, i) =>
-        i === index ? { ...project, [field]: value } : project
+        i === index ? { ...project, [field]: value } : project,
       ),
     }));
   };
@@ -180,11 +174,7 @@ function AdminProjects() {
   };
 
   const removeProject = (index) => {
-    if (
-      !window.confirm(
-        "Remove this project from your public portfolio?"
-      )
-    ) {
+    if (!window.confirm("Remove this project from your public portfolio?")) {
       return;
     }
 
@@ -202,10 +192,7 @@ function AdminProjects() {
     setFormData((current) => {
       const nextIndex = index + direction;
 
-      if (
-        nextIndex < 0 ||
-        nextIndex >= current.projects.length
-      ) {
+      if (nextIndex < 0 || nextIndex >= current.projects.length) {
         return current;
       }
 
@@ -235,7 +222,7 @@ function AdminProjects() {
         return {
           ...project,
           [field]: project[field].map((item, i) =>
-            i === itemIndex ? value : item
+            i === itemIndex ? value : item,
           ),
         };
       }),
@@ -260,7 +247,7 @@ function AdminProjects() {
               ...project,
               [field]: [...project[field], ""],
             }
-          : project
+          : project,
       ),
     }));
   };
@@ -274,21 +261,14 @@ function AdminProjects() {
         index === projectIndex
           ? {
               ...project,
-              [field]: project[field].filter(
-                (_, i) => i !== itemIndex
-              ),
+              [field]: project[field].filter((_, i) => i !== itemIndex),
             }
-          : project
+          : project,
       ),
     }));
   };
 
-  const moveItem = (
-    projectIndex,
-    field,
-    itemIndex,
-    direction
-  ) => {
+  const moveItem = (projectIndex, field, itemIndex, direction) => {
     clearMessages();
 
     setFormData((current) => ({
@@ -331,9 +311,7 @@ function AdminProjects() {
     const token = sessionStorage.getItem("adminToken");
 
     if (!token) {
-      setError(
-        "Your admin session has expired. Please log in again."
-      );
+      setError("Your admin session has expired. Please log in again.");
       return;
     }
 
@@ -347,11 +325,11 @@ function AdminProjects() {
           !project.visualStatus.trim() ||
           !project.visualYear.trim() ||
           project.technologies.some((item) => !item.trim()) ||
-          project.highlights.some((item) => !item.trim())
+          project.highlights.some((item) => !item.trim()),
       )
     ) {
       setError(
-        "Complete all required project fields and remove empty technologies or highlights."
+        "Complete all required project fields and remove empty technologies or highlights.",
       );
       return;
     }
@@ -360,15 +338,11 @@ function AdminProjects() {
       setSaving(true);
       clearMessages();
 
-      const response = await api.put(
-        "/projects",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.put("/projects", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.data?.success) {
         throw new Error("Server did not confirm the save.");
@@ -382,12 +356,23 @@ function AdminProjects() {
       }
 
       setSuccess("Projects page content saved successfully.");
+
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.message ||
-          "Unable to save Projects content."
+          "Unable to save Projects content.",
       );
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -406,22 +391,17 @@ function AdminProjects() {
     <div className="admin-projects">
       <header className="admin-projects-header">
         <div>
-          <Link
-            to="/admin/dashboard"
-            className="admin-projects-back"
-          >
+          <Link to="/admin/dashboard" className="admin-projects-back">
             ← Back to Dashboard
           </Link>
 
-          <p className="admin-projects-eyebrow">
-            CONTENT MANAGEMENT / 05
-          </p>
+          <p className="admin-projects-eyebrow">CONTENT MANAGEMENT / 05</p>
 
           <h1>Projects Page Editor</h1>
 
           <p className="admin-projects-subtitle">
-            Manage your projects, technologies, engineering
-            highlights and portfolio statistics.
+            Manage your projects, technologies, engineering highlights and
+            portfolio statistics.
           </p>
         </div>
 
@@ -447,10 +427,7 @@ function AdminProjects() {
         </div>
       )}
 
-      <form
-        className="admin-projects-form"
-        onSubmit={handleSubmit}
-      >
+      <form className="admin-projects-form" onSubmit={handleSubmit}>
         {/* ===================================================
             SECTION INFORMATION
         =================================================== */}
@@ -467,18 +444,14 @@ function AdminProjects() {
               label="Section Number"
               value={formData.section.number}
               maxLength={20}
-              onChange={(value) =>
-                updateSection("section", "number", value)
-              }
+              onChange={(value) => updateSection("section", "number", value)}
             />
 
             <Field
               label="Section Label"
               value={formData.section.label}
               maxLength={100}
-              onChange={(value) =>
-                updateSection("section", "label", value)
-              }
+              onChange={(value) => updateSection("section", "label", value)}
             />
 
             <Field
@@ -508,35 +481,27 @@ function AdminProjects() {
               label="Kicker Text"
               value={formData.intro.kicker}
               maxLength={200}
-              onChange={(value) =>
-                updateSection("intro", "kicker", value)
-              }
+              onChange={(value) => updateSection("intro", "kicker", value)}
             />
 
             <Field
               label="Title Line 1"
               value={formData.intro.title.line1}
               maxLength={150}
-              onChange={(value) =>
-                updateTitle("line1", value)
-              }
+              onChange={(value) => updateTitle("line1", value)}
             />
 
             <Field
               label="Title Line 2"
               value={formData.intro.title.line2}
               maxLength={150}
-              onChange={(value) =>
-                updateTitle("line2", value)
-              }
+              onChange={(value) => updateTitle("line2", value)}
             />
 
             <TextField
               label="Introduction Description"
               value={formData.intro.description}
-              onChange={(value) =>
-                updateSection("intro", "description", value)
-              }
+              onChange={(value) => updateSection("intro", "description", value)}
             />
           </div>
         </section>
@@ -555,9 +520,7 @@ function AdminProjects() {
           <div className="admin-projects-list-heading">
             <div>
               <h3>Projects</h3>
-              <p>
-                Manage projects displayed on your public page.
-              </p>
+              <p>Manage projects displayed on your public page.</p>
             </div>
 
             <button
@@ -577,9 +540,7 @@ function AdminProjects() {
               >
                 <div className="admin-projects-repeat-top">
                   <div>
-                    <strong>
-                      PROJECT {numberLabel(projectIndex)}
-                    </strong>
+                    <strong>PROJECT {numberLabel(projectIndex)}</strong>
                     <h3>{project.title || "New Project"}</h3>
                   </div>
 
@@ -587,9 +548,7 @@ function AdminProjects() {
                     <button
                       type="button"
                       disabled={projectIndex === 0}
-                      onClick={() =>
-                        moveProject(projectIndex, -1)
-                      }
+                      onClick={() => moveProject(projectIndex, -1)}
                       title="Move project up"
                     >
                       ↑
@@ -597,13 +556,8 @@ function AdminProjects() {
 
                     <button
                       type="button"
-                      disabled={
-                        projectIndex ===
-                        formData.projects.length - 1
-                      }
-                      onClick={() =>
-                        moveProject(projectIndex, 1)
-                      }
+                      disabled={projectIndex === formData.projects.length - 1}
+                      onClick={() => moveProject(projectIndex, 1)}
                       title="Move project down"
                     >
                       ↓
@@ -626,11 +580,7 @@ function AdminProjects() {
                     value={project.number}
                     maxLength={20}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "number",
-                        value
-                      )
+                      updateProject(projectIndex, "number", value)
                     }
                   />
 
@@ -639,11 +589,7 @@ function AdminProjects() {
                     value={project.category}
                     maxLength={150}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "category",
-                        value
-                      )
+                      updateProject(projectIndex, "category", value)
                     }
                   />
 
@@ -653,11 +599,7 @@ function AdminProjects() {
                     rows={2}
                     maxLength={250}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "title",
-                        value
-                      )
+                      updateProject(projectIndex, "title", value)
                     }
                     hint="Use a new line to split the title on the public page."
                   />
@@ -666,11 +608,7 @@ function AdminProjects() {
                     label="Project Description"
                     value={project.description}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "description",
-                        value
-                      )
+                      updateProject(projectIndex, "description", value)
                     }
                   />
 
@@ -679,11 +617,7 @@ function AdminProjects() {
                     value={project.github}
                     maxLength={500}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "github",
-                        value
-                      )
+                      updateProject(projectIndex, "github", value)
                     }
                   />
 
@@ -692,11 +626,7 @@ function AdminProjects() {
                     value={project.live}
                     maxLength={500}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "live",
-                        value
-                      )
+                      updateProject(projectIndex, "live", value)
                     }
                   />
 
@@ -705,11 +635,7 @@ function AdminProjects() {
                     value={project.visualStatus}
                     maxLength={100}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "visualStatus",
-                        value
-                      )
+                      updateProject(projectIndex, "visualStatus", value)
                     }
                   />
 
@@ -718,11 +644,7 @@ function AdminProjects() {
                     value={project.visualYear}
                     maxLength={20}
                     onChange={(value) =>
-                      updateProject(
-                        projectIndex,
-                        "visualYear",
-                        value
-                      )
+                      updateProject(projectIndex, "visualYear", value)
                     }
                   />
                 </div>
@@ -731,31 +653,15 @@ function AdminProjects() {
                   title="Technologies"
                   description="Technologies shown as badges."
                   items={project.technologies}
-                  onAdd={() =>
-                    addItem(projectIndex, "technologies")
-                  }
+                  onAdd={() => addItem(projectIndex, "technologies")}
                   onChange={(index, value) =>
-                    updateItem(
-                      projectIndex,
-                      "technologies",
-                      index,
-                      value
-                    )
+                    updateItem(projectIndex, "technologies", index, value)
                   }
                   onRemove={(index) =>
-                    removeItem(
-                      projectIndex,
-                      "technologies",
-                      index
-                    )
+                    removeItem(projectIndex, "technologies", index)
                   }
                   onMove={(index, direction) =>
-                    moveItem(
-                      projectIndex,
-                      "technologies",
-                      index,
-                      direction
-                    )
+                    moveItem(projectIndex, "technologies", index, direction)
                   }
                 />
 
@@ -763,31 +669,15 @@ function AdminProjects() {
                   title="Engineering Highlights"
                   description="Technical achievements and architecture decisions."
                   items={project.highlights}
-                  onAdd={() =>
-                    addItem(projectIndex, "highlights")
-                  }
+                  onAdd={() => addItem(projectIndex, "highlights")}
                   onChange={(index, value) =>
-                    updateItem(
-                      projectIndex,
-                      "highlights",
-                      index,
-                      value
-                    )
+                    updateItem(projectIndex, "highlights", index, value)
                   }
                   onRemove={(index) =>
-                    removeItem(
-                      projectIndex,
-                      "highlights",
-                      index
-                    )
+                    removeItem(projectIndex, "highlights", index)
                   }
                   onMove={(index, direction) =>
-                    moveItem(
-                      projectIndex,
-                      "highlights",
-                      index,
-                      direction
-                    )
+                    moveItem(projectIndex, "highlights", index, direction)
                   }
                   multiline
                 />
@@ -795,9 +685,7 @@ function AdminProjects() {
             ))}
 
             {formData.projects.length === 0 && (
-              <p className="admin-projects-empty">
-                No projects added yet.
-              </p>
+              <p className="admin-projects-empty">No projects added yet.</p>
             )}
           </div>
         </section>
@@ -836,18 +724,14 @@ function AdminProjects() {
               label="Engineering Focus Value"
               value={formData.bottom.focusValue}
               maxLength={100}
-              onChange={(value) =>
-                updateSection("bottom", "focusValue", value)
-              }
+              onChange={(value) => updateSection("bottom", "focusValue", value)}
             />
 
             <Field
               label="Engineering Focus Label"
               value={formData.bottom.focusLabel}
               maxLength={100}
-              onChange={(value) =>
-                updateSection("bottom", "focusLabel", value)
-              }
+              onChange={(value) => updateSection("bottom", "focusLabel", value)}
             />
 
             <Field
@@ -855,11 +739,7 @@ function AdminProjects() {
               value={formData.bottom.architectureValue}
               maxLength={100}
               onChange={(value) =>
-                updateSection(
-                  "bottom",
-                  "architectureValue",
-                  value
-                )
+                updateSection("bottom", "architectureValue", value)
               }
             />
 
@@ -868,26 +748,16 @@ function AdminProjects() {
               value={formData.bottom.architectureLabel}
               maxLength={100}
               onChange={(value) =>
-                updateSection(
-                  "bottom",
-                  "architectureLabel",
-                  value
-                )
+                updateSection("bottom", "architectureLabel", value)
               }
             />
           </div>
         </section>
 
         <div className="admin-projects-save-bar">
-          <p>
-            Save to update the Projects content stored in your
-            database.
-          </p>
+          <p>Save to update the Projects content stored in your database.</p>
 
-          <button
-            type="submit"
-            disabled={saving || !loaded}
-          >
+          <button type="submit" disabled={saving || !loaded}>
             {saving ? "Saving..." : "Save Changes"}
             {!saving && " ↗"}
           </button>
@@ -909,12 +779,7 @@ function SectionHeading({ number, title, description }) {
   );
 }
 
-function Field({
-  label,
-  value,
-  onChange,
-  maxLength,
-}) {
+function Field({ label, value, onChange, maxLength }) {
   return (
     <label className="admin-projects-field">
       <span>{label}</span>
@@ -923,22 +788,13 @@ function Field({
         value={value ?? ""}
         maxLength={maxLength}
         placeholder={`Enter ${label.toLowerCase()}`}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
       />
     </label>
   );
 }
 
-function TextField({
-  label,
-  value,
-  onChange,
-  rows = 4,
-  maxLength,
-  hint,
-}) {
+function TextField({ label, value, onChange, rows = 4, maxLength, hint }) {
   return (
     <label className="admin-projects-field full">
       <span>{label}</span>
@@ -947,15 +803,9 @@ function TextField({
         value={value ?? ""}
         maxLength={maxLength}
         placeholder={`Enter ${label.toLowerCase()}`}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
       />
-      {hint && (
-        <small className="admin-projects-hint">
-          {hint}
-        </small>
-      )}
+      {hint && <small className="admin-projects-hint">{hint}</small>}
     </label>
   );
 }
@@ -978,21 +828,14 @@ function ProjectItemsEditor({
           <p>{description}</p>
         </div>
 
-        <button
-          type="button"
-          onClick={onAdd}
-          disabled={items.length >= 50}
-        >
+        <button type="button" onClick={onAdd} disabled={items.length >= 50}>
           + Add {multiline ? "Highlight" : "Technology"}
         </button>
       </div>
 
       <div className="admin-projects-item-list">
         {items.map((item, index) => (
-          <div
-            className="admin-projects-item-row"
-            key={index}
-          >
+          <div className="admin-projects-item-row" key={index}>
             <span className="admin-projects-item-number">
               {numberLabel(index)}
             </span>
@@ -1003,18 +846,14 @@ function ProjectItemsEditor({
                   rows={2}
                   value={item}
                   placeholder={`Enter ${title.toLowerCase()}`}
-                  onChange={(event) =>
-                    onChange(index, event.target.value)
-                  }
+                  onChange={(event) => onChange(index, event.target.value)}
                 />
               ) : (
                 <input
                   type="text"
                   value={item}
                   placeholder="Technology name"
-                  onChange={(event) =>
-                    onChange(index, event.target.value)
-                  }
+                  onChange={(event) => onChange(index, event.target.value)}
                 />
               )}
             </div>

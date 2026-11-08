@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../services/api";
@@ -82,7 +81,7 @@ function AdminAbout() {
         setError(
           err.response?.data?.message ||
             err.message ||
-            "Unable to load About content."
+            "Unable to load About content.",
         );
       } finally {
         setLoading(false);
@@ -123,7 +122,7 @@ function AdminAbout() {
       philosophy: {
         ...current.philosophy,
         principles: current.philosophy.principles.map((item, i) =>
-          i === index ? { ...item, [field]: value } : item
+          i === index ? { ...item, [field]: value } : item,
         ),
       },
     }));
@@ -143,7 +142,10 @@ function AdminAbout() {
         principles: [
           ...current.philosophy.principles,
           {
-            number: String(current.philosophy.principles.length + 1).padStart(2, "0"),
+            number: String(current.philosophy.principles.length + 1).padStart(
+              2,
+              "0",
+            ),
             title: "",
             description: "",
           },
@@ -159,9 +161,7 @@ function AdminAbout() {
       ...current,
       philosophy: {
         ...current.philosophy,
-        principles: current.philosophy.principles.filter(
-          (_, i) => i !== index
-        ),
+        principles: current.philosophy.principles.filter((_, i) => i !== index),
       },
     }));
     setSuccess("");
@@ -189,7 +189,7 @@ function AdminAbout() {
     setFormData((current) => ({
       ...current,
       stack: current.stack.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
+        i === index ? { ...item, [field]: value } : item,
       ),
     }));
     setSuccess("");
@@ -258,7 +258,7 @@ function AdminAbout() {
               number,
               title,
               description,
-            })
+            }),
           ),
         },
         stack: formData.stack.map(({ name, category }) => ({
@@ -274,12 +274,22 @@ function AdminAbout() {
       });
 
       setSuccess("About page content saved successfully.");
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.message ||
-          "Unable to save About content."
+          "Unable to save About content.",
       );
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -318,31 +328,87 @@ function AdminAbout() {
         </Link>
       </header>
 
-      {error && <div className="admin-about-alert error" role="alert">{error}</div>}
-      {success && <div className="admin-about-alert success" role="status">{success}</div>}
+      {error && (
+        <div className="admin-about-alert error" role="alert">
+          {error}
+        </div>
+      )}
+      {success && (
+        <div className="admin-about-alert success" role="status">
+          {success}
+        </div>
+      )}
 
       <form className="admin-about-form" onSubmit={handleSubmit}>
         <section className="admin-about-panel">
-          <SectionHeading number="01" title="Section Information" description="Section labels and introduction heading." />
+          <SectionHeading
+            number="01"
+            title="Section Information"
+            description="Section labels and introduction heading."
+          />
 
           <div className="admin-about-fields">
-            <Field label="Section Index" value={formData.section.index} onChange={(v) => updateSection("section", "index", v)} />
-            <Field label="Section Label" value={formData.section.label} onChange={(v) => updateSection("section", "label", v)} />
-            <Field label="Eyebrow Text" value={formData.intro.eyebrow} onChange={(v) => updateSection("intro", "eyebrow", v)} />
-            <Field label="Title Line 1" value={formData.intro.title.line1} onChange={(v) => updateNested("intro", "title", "line1", v)} />
-            <Field label="Title Line 2" value={formData.intro.title.line2} onChange={(v) => updateNested("intro", "title", "line2", v)} />
-            <Field label="Title Line 3" value={formData.intro.title.line3} onChange={(v) => updateNested("intro", "title", "line3", v)} />
+            <Field
+              label="Section Index"
+              value={formData.section.index}
+              onChange={(v) => updateSection("section", "index", v)}
+            />
+            <Field
+              label="Section Label"
+              value={formData.section.label}
+              onChange={(v) => updateSection("section", "label", v)}
+            />
+            <Field
+              label="Eyebrow Text"
+              value={formData.intro.eyebrow}
+              onChange={(v) => updateSection("intro", "eyebrow", v)}
+            />
+            <Field
+              label="Title Line 1"
+              value={formData.intro.title.line1}
+              onChange={(v) => updateNested("intro", "title", "line1", v)}
+            />
+            <Field
+              label="Title Line 2"
+              value={formData.intro.title.line2}
+              onChange={(v) => updateNested("intro", "title", "line2", v)}
+            />
+            <Field
+              label="Title Line 3"
+              value={formData.intro.title.line3}
+              onChange={(v) => updateNested("intro", "title", "line3", v)}
+            />
           </div>
         </section>
 
         <section className="admin-about-panel">
-          <SectionHeading number="02" title="Profile Information" description="Your profile image, name and caption." />
+          <SectionHeading
+            number="02"
+            title="Profile Information"
+            description="Your profile image, name and caption."
+          />
 
           <div className="admin-about-fields">
-            <Field label="Profile Name" value={formData.profile.name} onChange={(v) => updateSection("profile", "name", v)} />
-            <Field label="Profile Number" value={formData.profile.number} onChange={(v) => updateSection("profile", "number", v)} />
-            <Field label="Profile Caption" value={formData.profile.caption} onChange={(v) => updateSection("profile", "caption", v)} />
-            <Field label="Profile Image URL / Path" value={formData.profile.image} onChange={(v) => updateSection("profile", "image", v)} />
+            <Field
+              label="Profile Name"
+              value={formData.profile.name}
+              onChange={(v) => updateSection("profile", "name", v)}
+            />
+            <Field
+              label="Profile Number"
+              value={formData.profile.number}
+              onChange={(v) => updateSection("profile", "number", v)}
+            />
+            <Field
+              label="Profile Caption"
+              value={formData.profile.caption}
+              onChange={(v) => updateSection("profile", "caption", v)}
+            />
+            <Field
+              label="Profile Image URL / Path"
+              value={formData.profile.image}
+              onChange={(v) => updateSection("profile", "image", v)}
+            />
           </div>
 
           {formData.profile.image && (
@@ -360,32 +426,80 @@ function AdminAbout() {
         </section>
 
         <section className="admin-about-panel">
-          <SectionHeading number="03" title="About Description" description="Your biography and professional introduction." />
+          <SectionHeading
+            number="03"
+            title="About Description"
+            description="Your biography and professional introduction."
+          />
 
           <div className="admin-about-fields">
-            <Field label="Copy Number" value={formData.about.number} onChange={(v) => updateSection("about", "number", v)} />
-            <Field label="Copy Heading" value={formData.about.heading} onChange={(v) => updateSection("about", "heading", v)} />
-            <TextField label="Introduction" value={formData.about.introduction} onChange={(v) => updateSection("about", "introduction", v)} />
-            <TextField label="Technical Focus" value={formData.about.technicalFocus} onChange={(v) => updateSection("about", "technicalFocus", v)} />
+            <Field
+              label="Copy Number"
+              value={formData.about.number}
+              onChange={(v) => updateSection("about", "number", v)}
+            />
+            <Field
+              label="Copy Heading"
+              value={formData.about.heading}
+              onChange={(v) => updateSection("about", "heading", v)}
+            />
+            <TextField
+              label="Introduction"
+              value={formData.about.introduction}
+              onChange={(v) => updateSection("about", "introduction", v)}
+            />
+            <TextField
+              label="Technical Focus"
+              value={formData.about.technicalFocus}
+              onChange={(v) => updateSection("about", "technicalFocus", v)}
+            />
           </div>
 
           <div className="admin-about-subsection">
             <h3>About Link</h3>
             <div className="admin-about-fields">
-              <Field label="Link Text" value={formData.link.text} onChange={(v) => updateSection("link", "text", v)} />
-              <Field label="Link URL" value={formData.link.url} onChange={(v) => updateSection("link", "url", v)} />
+              <Field
+                label="Link Text"
+                value={formData.link.text}
+                onChange={(v) => updateSection("link", "text", v)}
+              />
+              <Field
+                label="Link URL"
+                value={formData.link.url}
+                onChange={(v) => updateSection("link", "url", v)}
+              />
             </div>
           </div>
         </section>
 
         <section className="admin-about-panel">
-          <SectionHeading number="04" title="Engineering Philosophy" description="Manage your engineering philosophy and principles." />
+          <SectionHeading
+            number="04"
+            title="Engineering Philosophy"
+            description="Manage your engineering philosophy and principles."
+          />
 
           <div className="admin-about-fields">
-            <Field label="Section Number" value={formData.philosophy.sectionNumber} onChange={(v) => updateSection("philosophy", "sectionNumber", v)} />
-            <Field label="Section Label" value={formData.philosophy.sectionLabel} onChange={(v) => updateSection("philosophy", "sectionLabel", v)} />
-            <Field label="Philosophy Title" value={formData.philosophy.title} onChange={(v) => updateSection("philosophy", "title", v)} />
-            <TextField label="Philosophy Introduction" value={formData.philosophy.introduction} onChange={(v) => updateSection("philosophy", "introduction", v)} />
+            <Field
+              label="Section Number"
+              value={formData.philosophy.sectionNumber}
+              onChange={(v) => updateSection("philosophy", "sectionNumber", v)}
+            />
+            <Field
+              label="Section Label"
+              value={formData.philosophy.sectionLabel}
+              onChange={(v) => updateSection("philosophy", "sectionLabel", v)}
+            />
+            <Field
+              label="Philosophy Title"
+              value={formData.philosophy.title}
+              onChange={(v) => updateSection("philosophy", "title", v)}
+            />
+            <TextField
+              label="Philosophy Introduction"
+              value={formData.philosophy.introduction}
+              onChange={(v) => updateSection("philosophy", "introduction", v)}
+            />
           </div>
 
           <div className="admin-about-list-heading">
@@ -393,24 +507,60 @@ function AdminAbout() {
               <h3>Engineering Principles</h3>
               <p>Add, edit, remove and reorder principles.</p>
             </div>
-            <button type="button" onClick={addPrinciple}>+ Add Principle</button>
+            <button type="button" onClick={addPrinciple}>
+              + Add Principle
+            </button>
           </div>
 
           <div className="admin-about-repeat-list">
             {formData.philosophy.principles.map((item, index) => (
               <div className="admin-about-repeat-item" key={index}>
                 <div className="admin-about-repeat-top">
-                  <strong>PRINCIPLE {String(index + 1).padStart(2, "0")}</strong>
+                  <strong>
+                    PRINCIPLE {String(index + 1).padStart(2, "0")}
+                  </strong>
                   <div className="admin-about-repeat-actions">
-                    <button type="button" disabled={index === 0} onClick={() => movePrinciple(index, -1)}>↑</button>
-                    <button type="button" disabled={index === formData.philosophy.principles.length - 1} onClick={() => movePrinciple(index, 1)}>↓</button>
-                    <button type="button" className="remove" onClick={() => removePrinciple(index)}>×</button>
+                    <button
+                      type="button"
+                      disabled={index === 0}
+                      onClick={() => movePrinciple(index, -1)}
+                    >
+                      ↑
+                    </button>
+                    <button
+                      type="button"
+                      disabled={
+                        index === formData.philosophy.principles.length - 1
+                      }
+                      onClick={() => movePrinciple(index, 1)}
+                    >
+                      ↓
+                    </button>
+                    <button
+                      type="button"
+                      className="remove"
+                      onClick={() => removePrinciple(index)}
+                    >
+                      ×
+                    </button>
                   </div>
                 </div>
                 <div className="admin-about-fields">
-                  <Field label="Principle Number" value={item.number} onChange={(v) => updatePrinciple(index, "number", v)} />
-                  <Field label="Principle Title" value={item.title} onChange={(v) => updatePrinciple(index, "title", v)} />
-                  <TextField label="Principle Description" value={item.description} onChange={(v) => updatePrinciple(index, "description", v)} />
+                  <Field
+                    label="Principle Number"
+                    value={item.number}
+                    onChange={(v) => updatePrinciple(index, "number", v)}
+                  />
+                  <Field
+                    label="Principle Title"
+                    value={item.title}
+                    onChange={(v) => updatePrinciple(index, "title", v)}
+                  />
+                  <TextField
+                    label="Principle Description"
+                    value={item.description}
+                    onChange={(v) => updatePrinciple(index, "description", v)}
+                  />
                 </div>
               </div>
             ))}
@@ -421,28 +571,62 @@ function AdminAbout() {
         </section>
 
         <section className="admin-about-panel">
-          <SectionHeading number="05" title="Technology Stack" description="Manage the technologies displayed on your About page." />
+          <SectionHeading
+            number="05"
+            title="Technology Stack"
+            description="Manage the technologies displayed on your About page."
+          />
 
           <div className="admin-about-list-heading">
             <div>
               <h3>Technologies</h3>
               <p>Set each technology name and its category.</p>
             </div>
-            <button type="button" onClick={addTechnology}>+ Add Technology</button>
+            <button type="button" onClick={addTechnology}>
+              + Add Technology
+            </button>
           </div>
 
           <div className="admin-about-repeat-list">
             {formData.stack.map((item, index) => (
               <div className="admin-about-stack-item" key={index}>
-                <span className="admin-about-stack-number">{String(index + 1).padStart(2, "0")}</span>
+                <span className="admin-about-stack-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <div className="admin-about-stack-fields">
-                  <Field label="Technology Name" value={item.name} onChange={(v) => updateTechnology(index, "name", v)} />
-                  <Field label="Category" value={item.category || ""} onChange={(v) => updateTechnology(index, "category", v)} />
+                  <Field
+                    label="Technology Name"
+                    value={item.name}
+                    onChange={(v) => updateTechnology(index, "name", v)}
+                  />
+                  <Field
+                    label="Category"
+                    value={item.category || ""}
+                    onChange={(v) => updateTechnology(index, "category", v)}
+                  />
                 </div>
                 <div className="admin-about-repeat-actions">
-                  <button type="button" disabled={index === 0} onClick={() => moveTechnology(index, -1)}>↑</button>
-                  <button type="button" disabled={index === formData.stack.length - 1} onClick={() => moveTechnology(index, 1)}>↓</button>
-                  <button type="button" className="remove" onClick={() => removeTechnology(index)}>×</button>
+                  <button
+                    type="button"
+                    disabled={index === 0}
+                    onClick={() => moveTechnology(index, -1)}
+                  >
+                    ↑
+                  </button>
+                  <button
+                    type="button"
+                    disabled={index === formData.stack.length - 1}
+                    onClick={() => moveTechnology(index, 1)}
+                  >
+                    ↓
+                  </button>
+                  <button
+                    type="button"
+                    className="remove"
+                    onClick={() => removeTechnology(index)}
+                  >
+                    ×
+                  </button>
                 </div>
               </div>
             ))}

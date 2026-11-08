@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../services/api";
@@ -57,7 +56,7 @@ function normalizeHome(data) {
     },
     technologies: Array.isArray(data.technologies)
       ? data.technologies.map((item) =>
-          typeof item === "string" ? item : item.technologyName
+          typeof item === "string" ? item : item.technologyName,
         )
       : [],
     heroImage: data.heroImage || "",
@@ -90,7 +89,7 @@ function AdminHome() {
         setError(
           err.response?.data?.message ||
             err.message ||
-            "Unable to load Home content."
+            "Unable to load Home content.",
         );
       } finally {
         setLoading(false);
@@ -139,7 +138,7 @@ function AdminHome() {
     if (!technology) return;
 
     const alreadyExists = formData.technologies.some(
-      (item) => item.toLowerCase() === technology.toLowerCase()
+      (item) => item.toLowerCase() === technology.toLowerCase(),
     );
 
     if (alreadyExists) {
@@ -166,7 +165,7 @@ function AdminHome() {
     setFormData((current) => ({
       ...current,
       technologies: current.technologies.filter(
-        (_, itemIndex) => itemIndex !== index
+        (_, itemIndex) => itemIndex !== index,
       ),
     }));
     setSuccess("");
@@ -193,6 +192,8 @@ function AdminHome() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (saving) return;
+
     try {
       setSaving(true);
       setError("");
@@ -211,12 +212,24 @@ function AdminHome() {
       });
 
       setSuccess("Home page content saved successfully.");
+
+      // Scroll smoothly to the top after successful save
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.message ||
-          "Unable to save Home content."
+          "Unable to save Home content.",
       );
+
+      // Scroll smoothly to the top to show the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -292,17 +305,13 @@ function AdminHome() {
               label="Total Sections"
               type="number"
               value={formData.totalSections}
-              onChange={(value) =>
-                updateField("totalSections", Number(value))
-              }
+              onChange={(value) => updateField("totalSections", Number(value))}
             />
             <Field
               label="Portfolio Year"
               type="number"
               value={formData.portfolioYear}
-              onChange={(value) =>
-                updateField("portfolioYear", Number(value))
-              }
+              onChange={(value) => updateField("portfolioYear", Number(value))}
             />
             <Field
               label="Index Number"
@@ -335,30 +344,26 @@ function AdminHome() {
             <Field
               label="Title Line 1"
               value={formData.title.line1}
-              onChange={(value) =>
-                updateNestedField("title", "line1", value)
-              }
+              onChange={(value) => updateNestedField("title", "line1", value)}
             />
             <Field
               label="Title Line 2"
               value={formData.title.line2}
-              onChange={(value) =>
-                updateNestedField("title", "line2", value)
-              }
+              onChange={(value) => updateNestedField("title", "line2", value)}
             />
             <Field
               label="Title Line 3"
               value={formData.title.line3}
-              onChange={(value) =>
-                updateNestedField("title", "line3", value)
-              }
+              onChange={(value) => updateNestedField("title", "line3", value)}
             />
             <div className="admin-home-field full">
               <label htmlFor="home-description">Description</label>
               <textarea
                 id="home-description"
                 value={formData.description}
-                placeholder={formData.description || "Enter homepage description"}
+                placeholder={
+                  formData.description || "Enter homepage description"
+                }
                 onChange={(event) =>
                   updateField("description", event.target.value)
                 }
@@ -383,16 +388,12 @@ function AdminHome() {
               <Field
                 label="Button Text"
                 value={formData.buttons.primary.text}
-                onChange={(value) =>
-                  updateButton("primary", "text", value)
-                }
+                onChange={(value) => updateButton("primary", "text", value)}
               />
               <Field
                 label="Button Link"
                 value={formData.buttons.primary.link}
-                onChange={(value) =>
-                  updateButton("primary", "link", value)
-                }
+                onChange={(value) => updateButton("primary", "link", value)}
               />
             </div>
           </div>
@@ -403,16 +404,12 @@ function AdminHome() {
               <Field
                 label="Button Text"
                 value={formData.buttons.secondary.text}
-                onChange={(value) =>
-                  updateButton("secondary", "text", value)
-                }
+                onChange={(value) => updateButton("secondary", "text", value)}
               />
               <Field
                 label="Button Link"
                 value={formData.buttons.secondary.link}
-                onChange={(value) =>
-                  updateButton("secondary", "link", value)
-                }
+                onChange={(value) => updateButton("secondary", "link", value)}
               />
             </div>
           </div>
@@ -450,7 +447,10 @@ function AdminHome() {
               <p className="admin-home-empty">No technologies added yet.</p>
             ) : (
               formData.technologies.map((technology, index) => (
-                <div className="admin-home-tech-item" key={`${technology}-${index}`}>
+                <div
+                  className="admin-home-tech-item"
+                  key={`${technology}-${index}`}
+                >
                   <span className="admin-home-tech-number">
                     {String(index + 1).padStart(2, "0")}
                   </span>
@@ -500,9 +500,7 @@ function AdminHome() {
             <Field
               label="Visual Number"
               value={formData.visual.number}
-              onChange={(value) =>
-                updateNestedField("visual", "number", value)
-              }
+              onChange={(value) => updateNestedField("visual", "number", value)}
             />
             <Field
               label="Visual Label Line 1"
@@ -529,9 +527,7 @@ function AdminHome() {
             <Field
               label="Status"
               value={formData.visual.status}
-              onChange={(value) =>
-                updateNestedField("visual", "status", value)
-              }
+              onChange={(value) => updateNestedField("visual", "status", value)}
             />
             <Field
               label="Hero Image URL / Path"

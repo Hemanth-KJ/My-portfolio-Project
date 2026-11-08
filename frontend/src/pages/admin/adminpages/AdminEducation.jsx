@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../services/api";
@@ -73,7 +72,7 @@ function AdminEducation() {
         setError(
           err.response?.data?.message ||
             err.message ||
-            "Unable to load Education content."
+            "Unable to load Education content.",
         );
       } finally {
         setLoading(false);
@@ -128,7 +127,7 @@ function AdminEducation() {
     setFormData((current) => ({
       ...current,
       timeline: current.timeline.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item
+        i === index ? { ...item, [field]: value } : item,
       ),
     }));
     clearMessages();
@@ -220,7 +219,7 @@ function AdminEducation() {
             institution,
             description,
             status,
-          })
+          }),
         ),
         bottom: formData.bottom,
       };
@@ -232,14 +231,24 @@ function AdminEducation() {
       });
 
       setSuccess(
-        response.data?.message || "Education page content saved successfully."
+        response.data?.message || "Education page content saved successfully.",
       );
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.message ||
-          "Unable to save Education content."
+          "Unable to save Education content.",
       );
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -264,14 +273,13 @@ function AdminEducation() {
             ← Back to Dashboard
           </Link>
 
-          <p className="admin-about-eyebrow">
-            CONTENT MANAGEMENT / 03
-          </p>
+          <p className="admin-about-eyebrow">CONTENT MANAGEMENT / 03</p>
 
           <h1>Education Page Editor</h1>
 
           <p className="admin-about-subtitle">
-            Manage your academic journey, education timeline and closing statement.
+            Manage your academic journey, education timeline and closing
+            statement.
           </p>
         </div>
 
@@ -368,7 +376,10 @@ function AdminEducation() {
 
           <div className="admin-about-repeat-list">
             {formData.timeline.map((item, index) => (
-              <div className="admin-about-repeat-item" key={item.id ?? `new-${index}`}>
+              <div
+                className="admin-about-repeat-item"
+                key={item.id ?? `new-${index}`}
+              >
                 <div className="admin-about-repeat-top">
                   <strong>
                     EDUCATION {String(index + 1).padStart(2, "0")}
@@ -490,9 +501,7 @@ function AdminEducation() {
             <TextField
               label="Bottom Description"
               value={formData.bottom.description}
-              onChange={(value) =>
-                updateNested("bottom", "description", value)
-              }
+              onChange={(value) => updateNested("bottom", "description", value)}
             />
           </div>
         </section>
@@ -524,13 +533,7 @@ function SectionHeading({ number, title, description }) {
   );
 }
 
-function Field({
-  label,
-  value,
-  onChange,
-  placeholder,
-  readOnly = false,
-}) {
+function Field({ label, value, onChange, placeholder, readOnly = false }) {
   const id = `education-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
   return (

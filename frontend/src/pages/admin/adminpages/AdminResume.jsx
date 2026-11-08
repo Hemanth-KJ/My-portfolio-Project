@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../../../services/api";
@@ -39,8 +38,7 @@ const initialData = {
   },
 };
 
-const formatNumber = (index) =>
-  String(index + 1).padStart(2, "0");
+const formatNumber = (index) => String(index + 1).padStart(2, "0");
 
 const normalizeData = (data) => ({
   section: {
@@ -55,15 +53,9 @@ const normalizeData = (data) => ({
       ...data.hero?.name,
     },
   },
-  experience: Array.isArray(data.experience)
-    ? data.experience
-    : [],
-  education: Array.isArray(data.education)
-    ? data.education
-    : [],
-  skills: Array.isArray(data.skills)
-    ? data.skills
-    : [],
+  experience: Array.isArray(data.experience) ? data.experience : [],
+  education: Array.isArray(data.education) ? data.education : [],
+  skills: Array.isArray(data.skills) ? data.skills : [],
   resumePdfUrl: data.resumePdfUrl || "",
   cta: {
     ...initialData.cta,
@@ -101,10 +93,7 @@ function AdminResume() {
 
         const response = await api.get("/resume");
 
-        if (
-          !response.data?.success ||
-          !response.data?.data
-        ) {
+        if (!response.data?.success || !response.data?.data) {
           throw new Error("Resume content unavailable.");
         }
 
@@ -114,7 +103,7 @@ function AdminResume() {
         setError(
           err.response?.data?.message ||
             err.message ||
-            "Failed to load Resume content."
+            "Failed to load Resume content.",
         );
       } finally {
         setLoading(false);
@@ -207,19 +196,13 @@ function AdminResume() {
     setFormData((current) => ({
       ...current,
       experience: current.experience.map((item, i) =>
-        i === index
-          ? { ...item, [field]: value }
-          : item
+        i === index ? { ...item, [field]: value } : item,
       ),
     }));
   };
 
   const removeExperience = (index) => {
-    if (
-      !window.confirm(
-        "Remove this experience from your Resume page?"
-      )
-    ) {
+    if (!window.confirm("Remove this experience from your Resume page?")) {
       return;
     }
 
@@ -227,9 +210,7 @@ function AdminResume() {
 
     setFormData((current) => ({
       ...current,
-      experience: current.experience.filter(
-        (_, i) => i !== index
-      ),
+      experience: current.experience.filter((_, i) => i !== index),
     }));
   };
 
@@ -264,19 +245,13 @@ function AdminResume() {
     setFormData((current) => ({
       ...current,
       education: current.education.map((item, i) =>
-        i === index
-          ? { ...item, [field]: value }
-          : item
+        i === index ? { ...item, [field]: value } : item,
       ),
     }));
   };
 
   const removeEducation = (index) => {
-    if (
-      !window.confirm(
-        "Remove this education entry?"
-      )
-    ) {
+    if (!window.confirm("Remove this education entry?")) {
       return;
     }
 
@@ -284,9 +259,7 @@ function AdminResume() {
 
     setFormData((current) => ({
       ...current,
-      education: current.education.filter(
-        (_, i) => i !== index
-      ),
+      education: current.education.filter((_, i) => i !== index),
     }));
   };
 
@@ -313,9 +286,7 @@ function AdminResume() {
 
     setFormData((current) => ({
       ...current,
-      skills: current.skills.map((skill, i) =>
-        i === index ? value : skill
-      ),
+      skills: current.skills.map((skill, i) => (i === index ? value : skill)),
     }));
   };
 
@@ -324,9 +295,7 @@ function AdminResume() {
 
     setFormData((current) => ({
       ...current,
-      skills: current.skills.filter(
-        (_, i) => i !== index
-      ),
+      skills: current.skills.filter((_, i) => i !== index),
     }));
   };
 
@@ -341,17 +310,11 @@ function AdminResume() {
       const items = [...current[field]];
       const nextIndex = index + direction;
 
-      if (
-        nextIndex < 0 ||
-        nextIndex >= items.length
-      ) {
+      if (nextIndex < 0 || nextIndex >= items.length) {
         return current;
       }
 
-      [items[index], items[nextIndex]] = [
-        items[nextIndex],
-        items[index],
-      ];
+      [items[index], items[nextIndex]] = [items[nextIndex], items[index]];
 
       return {
         ...current,
@@ -375,9 +338,7 @@ function AdminResume() {
     const token = sessionStorage.getItem("adminToken");
 
     if (!token) {
-      setError(
-        "Admin session expired. Please log in again."
-      );
+      setError("Admin session expired. Please log in again.");
       return;
     }
 
@@ -387,21 +348,15 @@ function AdminResume() {
           !item.year.trim() ||
           !item.role.trim() ||
           !item.type.trim() ||
-          !item.description.trim()
+          !item.description.trim(),
       ) ||
       formData.education.some(
         (item) =>
-          !item.year.trim() ||
-          !item.degree.trim() ||
-          !item.institution.trim()
+          !item.year.trim() || !item.degree.trim() || !item.institution.trim(),
       ) ||
-      formData.skills.some(
-        (skill) => !skill.trim()
-      )
+      formData.skills.some((skill) => !skill.trim())
     ) {
-      setError(
-        "Complete all required fields before saving."
-      );
+      setError("Complete all required fields before saving.");
       return;
     }
 
@@ -409,43 +364,40 @@ function AdminResume() {
       setSaving(true);
       clearMessages();
 
-      const response = await api.put(
-        "/resume",
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await api.put("/resume", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (!response.data?.success) {
-        throw new Error(
-          "Server did not confirm the save."
-        );
+        throw new Error("Server did not confirm the save.");
       }
 
       // Reload generated database IDs.
       const refreshed = await api.get("/resume");
 
-      if (
-        refreshed.data?.success &&
-        refreshed.data?.data
-      ) {
-        setFormData(
-          normalizeData(refreshed.data.data)
-        );
+      if (refreshed.data?.success && refreshed.data?.data) {
+        setFormData(normalizeData(refreshed.data.data));
       }
 
-      setSuccess(
-        "Resume page updated successfully."
-      );
+      setSuccess("Resume page updated successfully.");
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } catch (err) {
       setError(
         err.response?.data?.message ||
           err.message ||
-          "Failed to save Resume content."
+          "Failed to save Resume content.",
       );
+      // Smooth scroll to top to display the error
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     } finally {
       setSaving(false);
     }
@@ -457,9 +409,7 @@ function AdminResume() {
 
   if (loading) {
     return (
-      <div className="admin-resume-loading">
-        Loading Resume content...
-      </div>
+      <div className="admin-resume-loading">Loading Resume content...</div>
     );
   }
 
@@ -471,23 +421,17 @@ function AdminResume() {
     <div className="admin-resume">
       <header className="admin-resume-header">
         <div>
-          <Link
-            to="/admin/dashboard"
-            className="admin-resume-back"
-          >
+          <Link to="/admin/dashboard" className="admin-resume-back">
             ← Back to Dashboard
           </Link>
 
-          <p className="admin-resume-eyebrow">
-            CONTENT MANAGEMENT / 06
-          </p>
+          <p className="admin-resume-eyebrow">CONTENT MANAGEMENT / 06</p>
 
           <h1>Resume Page Editor</h1>
 
           <p className="admin-resume-subtitle">
-            Manage your professional experience,
-            education, technical skills and resume
-            content.
+            Manage your professional experience, education, technical skills and
+            resume content.
           </p>
         </div>
 
@@ -501,22 +445,11 @@ function AdminResume() {
         </Link>
       </header>
 
-      {error && (
-        <div className="admin-resume-alert error">
-          {error}
-        </div>
-      )}
+      {error && <div className="admin-resume-alert error">{error}</div>}
 
-      {success && (
-        <div className="admin-resume-alert success">
-          {success}
-        </div>
-      )}
+      {success && <div className="admin-resume-alert success">{success}</div>}
 
-      <form
-        className="admin-resume-form"
-        onSubmit={handleSubmit}
-      >
+      <form className="admin-resume-form" onSubmit={handleSubmit}>
         {/* ===================================================
             SECTION HEADER
         =================================================== */}
@@ -533,26 +466,14 @@ function AdminResume() {
               label="Section Number"
               value={formData.section.number}
               maxLength={20}
-              onChange={(value) =>
-                updateSection(
-                  "section",
-                  "number",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("section", "number", value)}
             />
 
             <Field
               label="Section Label"
               value={formData.section.label}
               maxLength={100}
-              onChange={(value) =>
-                updateSection(
-                  "section",
-                  "label",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("section", "label", value)}
             />
           </div>
         </section>
@@ -573,56 +494,34 @@ function AdminResume() {
               label="Hero Kicker"
               value={formData.hero.kicker}
               maxLength={200}
-              onChange={(value) =>
-                updateSection(
-                  "hero",
-                  "kicker",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("hero", "kicker", value)}
             />
 
             <Field
               label="Name Line 1"
               value={formData.hero.name.line1}
               maxLength={100}
-              onChange={(value) =>
-                updateHeroName("line1", value)
-              }
+              onChange={(value) => updateHeroName("line1", value)}
             />
 
             <Field
               label="Name Line 2"
               value={formData.hero.name.line2}
               maxLength={100}
-              onChange={(value) =>
-                updateHeroName("line2", value)
-              }
+              onChange={(value) => updateHeroName("line2", value)}
             />
 
             <Field
               label="Availability Status"
               value={formData.hero.availability}
               maxLength={250}
-              onChange={(value) =>
-                updateSection(
-                  "hero",
-                  "availability",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("hero", "availability", value)}
             />
 
             <TextField
               label="Hero Description"
               value={formData.hero.description}
-              onChange={(value) =>
-                updateSection(
-                  "hero",
-                  "description",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("hero", "description", value)}
             />
           </div>
         </section>
@@ -646,97 +545,53 @@ function AdminResume() {
           />
 
           <div className="admin-resume-repeat-list">
-            {formData.experience.map(
-              (item, index) => (
-                <div
-                  className="admin-resume-repeat-item"
-                  key={item.id ?? `new-${index}`}
-                >
-                  <ItemHeader
-                    number={formatNumber(index)}
-                    title={
-                      item.role ||
-                      "New Experience"
-                    }
-                    onUp={() =>
-                      moveItem(
-                        "experience",
-                        index,
-                        -1
-                      )
-                    }
-                    onDown={() =>
-                      moveItem(
-                        "experience",
-                        index,
-                        1
-                      )
-                    }
-                    onRemove={() =>
-                      removeExperience(index)
-                    }
-                    disableUp={index === 0}
-                    disableDown={
-                      index ===
-                      formData.experience.length - 1
-                    }
+            {formData.experience.map((item, index) => (
+              <div
+                className="admin-resume-repeat-item"
+                key={item.id ?? `new-${index}`}
+              >
+                <ItemHeader
+                  number={formatNumber(index)}
+                  title={item.role || "New Experience"}
+                  onUp={() => moveItem("experience", index, -1)}
+                  onDown={() => moveItem("experience", index, 1)}
+                  onRemove={() => removeExperience(index)}
+                  disableUp={index === 0}
+                  disableDown={index === formData.experience.length - 1}
+                />
+
+                <div className="admin-resume-fields">
+                  <Field
+                    label="Year / Duration"
+                    value={item.year}
+                    maxLength={50}
+                    onChange={(value) => updateExperience(index, "year", value)}
                   />
 
-                  <div className="admin-resume-fields">
-                    <Field
-                      label="Year / Duration"
-                      value={item.year}
-                      maxLength={50}
-                      onChange={(value) =>
-                        updateExperience(
-                          index,
-                          "year",
-                          value
-                        )
-                      }
-                    />
+                  <Field
+                    label="Role"
+                    value={item.role}
+                    maxLength={200}
+                    onChange={(value) => updateExperience(index, "role", value)}
+                  />
 
-                    <Field
-                      label="Role"
-                      value={item.role}
-                      maxLength={200}
-                      onChange={(value) =>
-                        updateExperience(
-                          index,
-                          "role",
-                          value
-                        )
-                      }
-                    />
+                  <Field
+                    label="Experience Type"
+                    value={item.type}
+                    maxLength={200}
+                    onChange={(value) => updateExperience(index, "type", value)}
+                  />
 
-                    <Field
-                      label="Experience Type"
-                      value={item.type}
-                      maxLength={200}
-                      onChange={(value) =>
-                        updateExperience(
-                          index,
-                          "type",
-                          value
-                        )
-                      }
-                    />
-
-                    <TextField
-                      label="Description"
-                      value={item.description}
-                      onChange={(value) =>
-                        updateExperience(
-                          index,
-                          "description",
-                          value
-                        )
-                      }
-                    />
-                  </div>
+                  <TextField
+                    label="Description"
+                    value={item.description}
+                    onChange={(value) =>
+                      updateExperience(index, "description", value)
+                    }
+                  />
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </div>
         </section>
 
@@ -759,85 +614,49 @@ function AdminResume() {
           />
 
           <div className="admin-resume-repeat-list">
-            {formData.education.map(
-              (item, index) => (
-                <div
-                  className="admin-resume-repeat-item"
-                  key={item.id ?? `new-${index}`}
-                >
-                  <ItemHeader
-                    number={formatNumber(index)}
-                    title={
-                      item.degree ||
-                      "New Education"
-                    }
-                    onUp={() =>
-                      moveItem(
-                        "education",
-                        index,
-                        -1
-                      )
-                    }
-                    onDown={() =>
-                      moveItem(
-                        "education",
-                        index,
-                        1
-                      )
-                    }
-                    onRemove={() =>
-                      removeEducation(index)
-                    }
-                    disableUp={index === 0}
-                    disableDown={
-                      index ===
-                      formData.education.length - 1
+            {formData.education.map((item, index) => (
+              <div
+                className="admin-resume-repeat-item"
+                key={item.id ?? `new-${index}`}
+              >
+                <ItemHeader
+                  number={formatNumber(index)}
+                  title={item.degree || "New Education"}
+                  onUp={() => moveItem("education", index, -1)}
+                  onDown={() => moveItem("education", index, 1)}
+                  onRemove={() => removeEducation(index)}
+                  disableUp={index === 0}
+                  disableDown={index === formData.education.length - 1}
+                />
+
+                <div className="admin-resume-fields">
+                  <Field
+                    label="Year"
+                    value={item.year}
+                    maxLength={50}
+                    onChange={(value) => updateEducation(index, "year", value)}
+                  />
+
+                  <Field
+                    label="Degree"
+                    value={item.degree}
+                    maxLength={250}
+                    onChange={(value) =>
+                      updateEducation(index, "degree", value)
                     }
                   />
 
-                  <div className="admin-resume-fields">
-                    <Field
-                      label="Year"
-                      value={item.year}
-                      maxLength={50}
-                      onChange={(value) =>
-                        updateEducation(
-                          index,
-                          "year",
-                          value
-                        )
-                      }
-                    />
-
-                    <Field
-                      label="Degree"
-                      value={item.degree}
-                      maxLength={250}
-                      onChange={(value) =>
-                        updateEducation(
-                          index,
-                          "degree",
-                          value
-                        )
-                      }
-                    />
-
-                    <Field
-                      label="Institution"
-                      value={item.institution}
-                      maxLength={250}
-                      onChange={(value) =>
-                        updateEducation(
-                          index,
-                          "institution",
-                          value
-                        )
-                      }
-                    />
-                  </div>
+                  <Field
+                    label="Institution"
+                    value={item.institution}
+                    maxLength={250}
+                    onChange={(value) =>
+                      updateEducation(index, "institution", value)
+                    }
+                  />
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </div>
         </section>
 
@@ -860,74 +679,45 @@ function AdminResume() {
           />
 
           <div className="admin-resume-skills-list">
-            {formData.skills.map(
-              (skill, index) => (
-                <div
-                  className="admin-resume-skill-row"
-                  key={index}
-                >
-                  <span>
-                    {formatNumber(index)}
-                  </span>
+            {formData.skills.map((skill, index) => (
+              <div className="admin-resume-skill-row" key={index}>
+                <span>{formatNumber(index)}</span>
 
-                  <input
-                    type="text"
-                    maxLength={150}
-                    value={skill}
-                    placeholder="Skill name"
-                    onChange={(event) =>
-                      updateSkill(
-                        index,
-                        event.target.value
-                      )
-                    }
-                  />
+                <input
+                  type="text"
+                  maxLength={150}
+                  value={skill}
+                  placeholder="Skill name"
+                  onChange={(event) => updateSkill(index, event.target.value)}
+                />
 
-                  <div className="admin-resume-actions">
-                    <button
-                      type="button"
-                      disabled={index === 0}
-                      onClick={() =>
-                        moveItem(
-                          "skills",
-                          index,
-                          -1
-                        )
-                      }
-                    >
-                      ↑
-                    </button>
+                <div className="admin-resume-actions">
+                  <button
+                    type="button"
+                    disabled={index === 0}
+                    onClick={() => moveItem("skills", index, -1)}
+                  >
+                    ↑
+                  </button>
 
-                    <button
-                      type="button"
-                      disabled={
-                        index ===
-                        formData.skills.length - 1
-                      }
-                      onClick={() =>
-                        moveItem(
-                          "skills",
-                          index,
-                          1
-                        )
-                      }
-                    >
-                      ↓
-                    </button>
+                  <button
+                    type="button"
+                    disabled={index === formData.skills.length - 1}
+                    onClick={() => moveItem("skills", index, 1)}
+                  >
+                    ↓
+                  </button>
 
-                    <button
-                      type="button"
-                      className="remove"
-                      onClick={() =>
-                        removeSkill(index)
-                      }
-                    >
-                      ×
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    className="remove"
+                    onClick={() => removeSkill(index)}
+                  >
+                    ×
+                  </button>
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </div>
         </section>
 
@@ -944,9 +734,7 @@ function AdminResume() {
 
           <div className="admin-resume-fields">
             <div className="admin-resume-field full">
-              <label htmlFor="resume-pdf-url">
-                Resume PDF URL
-              </label>
+              <label htmlFor="resume-pdf-url">Resume PDF URL</label>
 
               <input
                 id="resume-pdf-url"
@@ -958,8 +746,7 @@ function AdminResume() {
                   clearMessages();
                   setFormData((current) => ({
                     ...current,
-                    resumePdfUrl:
-                      event.target.value,
+                    resumePdfUrl: event.target.value,
                   }));
                 }}
               />
@@ -980,31 +767,21 @@ function AdminResume() {
               label="CTA Label"
               value={formData.cta.label}
               maxLength={200}
-              onChange={(value) =>
-                updateSection(
-                  "cta",
-                  "label",
-                  value
-                )
-              }
+              onChange={(value) => updateSection("cta", "label", value)}
             />
 
             <Field
               label="CTA Title Line 1"
               value={formData.cta.title.line1}
               maxLength={100}
-              onChange={(value) =>
-                updateCtaTitle("line1", value)
-              }
+              onChange={(value) => updateCtaTitle("line1", value)}
             />
 
             <Field
               label="CTA Title Line 2"
               value={formData.cta.title.line2}
               maxLength={100}
-              onChange={(value) =>
-                updateCtaTitle("line2", value)
-              }
+              onChange={(value) => updateCtaTitle("line2", value)}
             />
           </div>
         </section>
@@ -1014,18 +791,10 @@ function AdminResume() {
         =================================================== */}
 
         <div className="admin-resume-save-bar">
-          <p>
-            Save to update your Resume content
-            stored in PostgreSQL.
-          </p>
+          <p>Save to update your Resume content stored in PostgreSQL.</p>
 
-          <button
-            type="submit"
-            disabled={saving || !loaded}
-          >
-            {saving
-              ? "Saving..."
-              : "Save Changes"}
+          <button type="submit" disabled={saving || !loaded}>
+            {saving ? "Saving..." : "Save Changes"}
 
             {!saving && " ↗"}
           </button>
@@ -1039,11 +808,7 @@ function AdminResume() {
 // REUSABLE LOCAL COMPONENTS
 // =========================================================
 
-function SectionHeading({
-  number,
-  title,
-  description,
-}) {
+function SectionHeading({ number, title, description }) {
   return (
     <div className="admin-resume-section-heading">
       <span>{number}</span>
@@ -1056,12 +821,7 @@ function SectionHeading({
   );
 }
 
-function Field({
-  label,
-  value,
-  onChange,
-  maxLength,
-}) {
+function Field({ label, value, onChange, maxLength }) {
   return (
     <label className="admin-resume-field">
       <span>{label}</span>
@@ -1071,19 +831,13 @@ function Field({
         value={value ?? ""}
         maxLength={maxLength}
         placeholder={`Enter ${label.toLowerCase()}`}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
       />
     </label>
   );
 }
 
-function TextField({
-  label,
-  value,
-  onChange,
-}) {
+function TextField({ label, value, onChange }) {
   return (
     <label className="admin-resume-field full">
       <span>{label}</span>
@@ -1092,20 +846,13 @@ function TextField({
         rows={4}
         value={value ?? ""}
         placeholder={`Enter ${label.toLowerCase()}`}
-        onChange={(event) =>
-          onChange(event.target.value)
-        }
+        onChange={(event) => onChange(event.target.value)}
       />
     </label>
   );
 }
 
-function ListHeader({
-  title,
-  count,
-  onAdd,
-  addLabel,
-}) {
+function ListHeader({ title, count, onAdd, addLabel }) {
   return (
     <div className="admin-resume-list-heading">
       <div>
@@ -1113,10 +860,7 @@ function ListHeader({
         <p>{count} entries</p>
       </div>
 
-      <button
-        type="button"
-        onClick={onAdd}
-      >
+      <button type="button" onClick={onAdd}>
         + {addLabel}
       </button>
     </div>
