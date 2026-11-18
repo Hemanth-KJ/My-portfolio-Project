@@ -5,6 +5,8 @@ import {
   updateContactPage,
 } from "../models/contactModel.js";
 
+import { sendContactEmail } from "../services/emailService.js";
+
 // =========================================================
 // GET CONTACT PAGE
 // =========================================================
@@ -84,15 +86,20 @@ export const getContactPage = async (req, res) => {
 // SUBMIT CONTACT MESSAGE
 // =========================================================
 
+
 export const submitContactMessage = async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, email, message } = req.body || {};
 
-    // -----------------------------------------------------
-    // VALIDATION
-    // -----------------------------------------------------
+    // =========================================
+    // VALIDATE INPUT
+    // =========================================
 
-    if (!name || !email || !message) {
+    if (
+      typeof name !== "string" ||
+      typeof email !== "string" ||
+      typeof message !== "string"
+    ) {
       return res.status(400).json({
         success: false,
         message: "Name, email and message are required",
@@ -110,9 +117,16 @@ export const submitContactMessage = async (req, res) => {
       });
     }
 
-    // -----------------------------------------------------
-    // EMAIL VALIDATION
-    // -----------------------------------------------------
+    if (
+      cleanName.length > 100 ||
+      cleanEmail.length > 255 ||
+      cleanMessage.length > 10000
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Contact message exceeds allowed length",
+      });
+    }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -123,9 +137,9 @@ export const submitContactMessage = async (req, res) => {
       });
     }
 
-    // -----------------------------------------------------
-    // SAVE MESSAGE
-    // -----------------------------------------------------
+    // =========================================
+    // SAVE MESSAGE TO POSTGRESQL
+    // =========================================
 
     const contactMessage = await createContactMessage(
       cleanName,
@@ -133,21 +147,49 @@ export const submitContactMessage = async (req, res) => {
       cleanMessage
     );
 
-    // -----------------------------------------------------
-    // RESPONSE
-    // -----------------------------------------------------
+    // =========================================
+    // SEND EMAIL NOTIFICATION
+    // =========================================
 
-    res.status(201).json({
+    try {
+      await sendContactEmail({
+        name: cleanName,
+        email: cleanEmail,
+        message: cleanMessage,
+      });
+
+      console.log(
+        "Portfolio contact email notification sent."
+      );
+    } catch (emailError) {
+      console.error(
+        "Contact email notification failed:",
+        emailError
+      );
+
+      // Message is already stored in PostgreSQL.
+      // Do not report submission failure to visitor.
+    }
+
+    // =========================================
+    // SUCCESS RESPONSE
+    // =========================================
+
+    return res.status(201).json({
       success: true,
       message: "Message received successfully",
       data: contactMessage,
     });
-  } catch (error) {
-    console.error("Submit contact message error:", error);
 
-    res.status(500).json({
+  } catch (error) {
+    console.error(
+      "Submit contact message error:",
+      error
+    );
+
+    return res.status(500).json({
       success: false,
-      message: "Failed to send message",
+      message: "Failed to submit contact message",
     });
   }
 };

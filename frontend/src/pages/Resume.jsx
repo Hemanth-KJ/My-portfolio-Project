@@ -405,9 +405,7 @@ function Resume() {
                 </div>
 
 
-                <span className="resume-project-arrow">
-                  ↗
-                </span>
+                
 
               </div>
 

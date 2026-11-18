@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import heroImage from "../assets/hero.png";
+import heroImage from "../assets/hero_1.png";
 
 import api from "../services/api";
 
