@@ -1,38 +1,79 @@
-import nodemailer from "nodemailer";
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: Number(process.env.SMTP_PORT || 465),
-  secure: true,
+import "dotenv/config";
 
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
+const RESEND_API_URL = "https://api.resend.com/emails";
 
 export const sendContactEmail = async ({
   name,
   email,
   message,
 }) => {
-  await transporter.sendMail({
-    from: process.env.SMTP_USER,
+  const {
+    RESEND_API_KEY,
+    CONTACT_RECEIVER_EMAIL,
+  } = process.env;
 
-    to: process.env.CONTACT_RECEIVER_EMAIL,
+  if (!RESEND_API_KEY || !CONTACT_RECEIVER_EMAIL) {
+    throw new Error(
+      "Resend email environment variables are missing"
+    );
+  }
 
-    replyTo: email,
+  const controller = new AbortController();
 
-    subject: "New Portfolio Contact Message",
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 10000);
 
-    text: `
-New message from your portfolio website.
+  try {
+    const response = await fetch(RESEND_API_URL, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Portfolio Contact <onboarding@resend.dev>",
 
-Name: ${name}
-Email: ${email}
+        to: [CONTACT_RECEIVER_EMAIL],
 
-Message:
-${message}
-    `,
-  });
+        reply_to: email,
+
+        subject: `New Portfolio Message from ${name}`,
+
+        text: [
+          "You received a new portfolio contact message.",
+          "",
+          `Name: ${name}`,
+          `Email: ${email}`,
+          "",
+          "Message:",
+          message,
+        ].join("\n"),
+      }),
+      signal: controller.signal,
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+
+      console.error(
+        "Resend API error:",
+        response.status,
+        error.slice(0, 500)
+      );
+
+      throw new Error(
+        `Resend email request failed: ${response.status}`
+      );
+    }
+
+    const result = await response.json();
+
+    console.log("Resend accepted email:", result.id);
+
+    return result.id;
+  } finally {
+    clearTimeout(timeout);
+  }
 };
