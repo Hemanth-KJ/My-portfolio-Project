@@ -1,6 +1,8 @@
+
+import "dotenv/config";
+
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import helmet from "helmet";
 import morgan from "morgan";
 
@@ -15,19 +17,27 @@ import resumeRoutes from "./routes/resumeRoutes.js";
 import contactRoutes from "./routes/contactRoutes.js";
 import adminAuthRoutes from "./routes/adminAuthRoutes.js";
 
-dotenv.config();
-
 const app = express();
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT || 5000);
+const isProduction = process.env.NODE_ENV === "production";
 
+// =========================================================
+// PROXY CONFIGURATION
+// =========================================================
+
+// Render uses a reverse proxy.
+// Trust only the first proxy hop.
+if (isProduction) {
+  app.set("trust proxy", 1);
+}
 
 // =========================================================
 // SECURITY
 // =========================================================
 
+app.disable("x-powered-by");
 app.use(helmet());
-
 
 // =========================================================
 // CORS
@@ -35,23 +45,40 @@ app.use(helmet());
 
 const allowedOrigins = [
   "http://localhost:5173",
+  ...(process.env.FRONTEND_URL || "")
+    .split(",")
+    .map((origin) => origin.trim().replace(/\/$/, ""))
+    .filter(Boolean),
 ];
 
 app.use(
   cors({
-    origin: (origin, callback) => {
+    origin(origin, callback) {
       if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+        return callback(null, true);
       }
+
+      return callback(
+        Object.assign(new Error("Not allowed by CORS"), {
+          status: 403,
+        })
+      );
     },
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    methods: [
+      "GET",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+    ],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+    ],
     credentials: true,
   })
 );
-
 
 // =========================================================
 // BODY PARSING
@@ -70,38 +97,51 @@ app.use(
   })
 );
 
-
 // =========================================================
 // LOGGING
 // =========================================================
 
-app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
-
+app.use(
+  morgan(isProduction ? "combined" : "dev")
+);
 
 // =========================================================
-// HEALTH CHECK
+// HEALTH CHECKS
 // =========================================================
 
+// Lightweight health check for Render.
+// Does not require a database query.
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Portfolio API is running",
+  });
+});
+
+// Database health check.
+// Preserves your existing endpoint.
 app.get("/api/v1/health", async (req, res) => {
   try {
     const result = await pool.query("SELECT NOW()");
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Portfolio API is running",
       database: "connected",
       time: result.rows[0].now,
     });
   } catch (error) {
-    console.error("Database error:", error);
+    console.error(
+      "Database health check failed:",
+      error.message
+    );
 
-    res.status(500).json({
+    return res.status(503).json({
       success: false,
       message: "Database connection failed",
     });
   }
 });
-
 
 // =========================================================
 // API ROUTES
@@ -116,7 +156,6 @@ app.use("/api/v1/resume", resumeRoutes);
 app.use("/api/v1/contact", contactRoutes);
 app.use("/api/v1/admin", adminAuthRoutes);
 
-
 // =========================================================
 // 404 HANDLER
 // =========================================================
@@ -128,28 +167,38 @@ app.use((req, res) => {
   });
 });
 
-
 // =========================================================
 // GLOBAL ERROR HANDLER
 // =========================================================
 
 app.use((error, req, res, next) => {
-  console.error("Unhandled server error:", error);
+  console.error(
+    "Unhandled server error:",
+    error.message
+  );
 
-  res.status(error.status || 500).json({
+  const status =
+    Number.isInteger(error.status) &&
+    error.status >= 400 &&
+    error.status < 600
+      ? error.status
+      : 500;
+
+  res.status(status).json({
     success: false,
     message:
-      process.env.NODE_ENV === "production"
+      isProduction && status === 500
         ? "Internal server error"
         : error.message,
   });
 });
 
-
 // =========================================================
 // START SERVER
 // =========================================================
 
-app.listen(PORT, () => {
-  console.log(`Portfolio API running on port ${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(
+    `Portfolio API running on port ${PORT}`
+  );
 });
