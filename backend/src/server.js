@@ -111,7 +111,7 @@ app.use(
 
 // Lightweight health check for Render.
 // Does not require a database query.
-app.get("/health", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({
     success: true,
     message: "Portfolio API is running",
